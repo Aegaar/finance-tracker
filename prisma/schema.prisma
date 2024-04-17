@@ -10,8 +10,8 @@ datasource db {
 model Income {
   id          Int      @id @default(autoincrement())
   title       String   @db.VarChar(255)
-  Amount      Int
-  Date        DateTime
+  amount      Int
+  date        DateTime
   description String   @db.Text
   source      Source   @default(SALARY)
   createdAt   DateTime @default(now())
