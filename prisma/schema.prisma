@@ -6,3 +6,23 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Income {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(255)
+  Amount      Int
+  Date        DateTime
+  description String   @db.Text
+  source      Source   @default(SALARY)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum Source {
+  SALARY
+  FREELANCING
+  INVESTIMENTS
+  STOCKS
+  BANK_TRANSFERS
+  OTHER
+}
