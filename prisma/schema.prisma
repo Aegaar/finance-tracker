@@ -8,21 +8,42 @@ datasource db {
 }
 
 model Income {
-  id          Int      @id @default(autoincrement())
-  title       String   @db.VarChar(255)
+  id          Int       @id @default(autoincrement())
+  title       String    @db.VarChar(255)
   amount      Int
   // incomeDate  DateTime
-  description String   @db.Text
-  source      Source   @default(SALARY)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  description String    @db.Text
+  source      IncomeSource @default(SALARY)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
-enum Source {
+model Expense {
+  id          Int       @id @default(autoincrement())
+  title       String    @db.VarChar(255)
+  amount      Int
+  // expenseDate  DateTime
+  description String    @db.Text
+  source      ExpenseSource @default(GROCERIES)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+enum IncomeSource {
   SALARY
   FREELANCING
-  INVESTIMENTS
+  INVESTMENTS
   STOCKS
   BANK_TRANSFERS
+  OTHER
+}
+
+enum ExpenseSource {
+  EDUCATION
+  GROCERIES
+  HEALTH
+  SUBSCRIPTIONS
+  CLOTHING
+  TRAVELING
   OTHER
 }
