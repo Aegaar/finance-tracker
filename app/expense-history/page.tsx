@@ -1,7 +1,8 @@
+import React from 'react'
 
 function page() {
   return (
-    <div>expense history</div>
+    <div>Expense history</div>
   )
 }
 
