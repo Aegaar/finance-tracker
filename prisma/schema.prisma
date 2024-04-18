@@ -11,7 +11,7 @@ model Income {
   id          Int      @id @default(autoincrement())
   title       String   @db.VarChar(255)
   amount      Int
-  date        DateTime
+  // incomeDate  DateTime
   description String   @db.Text
   source      Source   @default(SALARY)
   createdAt   DateTime @default(now())

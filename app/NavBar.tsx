@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { HandCoins } from "lucide-react";
 import { usePathname } from "next/navigation";
+import React from "react";
 
 function NavBar() {
   const path = usePathname();
