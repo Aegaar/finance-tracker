@@ -73,7 +73,7 @@ function NewIncomePage() {
                         value="ColorBlack"
                         id="ColorBlack"
                         className="sr-only"
-                        checked
+                        
                       />
 
                       <p className="text-sm font-medium">Texas Tea</p>
