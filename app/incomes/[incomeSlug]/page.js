@@ -1,8 +1,6 @@
 import React from "react";
 
-function SingleIncome({ params }: { params: {
-    incomeSlug: string;
-}}) {
+function SingleIncome({ params }) {
   const income = params.incomeSlug
 
   return <div>{income}</div>;
