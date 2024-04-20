@@ -7,20 +7,32 @@ import { useEffect } from "react";
 
 function page() {
   const { data, status } = useSession();
-
-  useEffect(() => {
-    if (status === "authenticated") {
-      router.push("/");
-    }
-  }, [status]);
-
-  console.log(status, data);
-
   const router = useRouter();
+
+  // TODO FIND A ANOTHER WAY TO REPAIR A PATH REVALIDATE 
 
   if (status === "loading") {
     return <div>loading...</div>;
   }
+
+  // useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/");
+    }
+  // }, [status, router]);
+
+  // console.log(status, data);
+
+
+  // if (status === "loading") {
+  //   return <div>Loading...</div>;
+  // }
+
+  // if (status === "authenticated") {
+  //   router.push("/")
+  // }
+
+  
 
   return (
     <div>

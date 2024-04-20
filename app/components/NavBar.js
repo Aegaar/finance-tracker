@@ -4,17 +4,18 @@ import Link from "next/link";
 import { HandCoins, Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
 import {useState} from "react";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 
 
 
 function NavBar() {
+  const {status} = useSession()
+
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen((prevState) => !prevState);
   const closeMenu = () => setMenuOpen(false);
   const path = usePathname();
-  const status = "auth";
   const links = [
     { name: "Incomes", href: "/incomes" },
     { name: "Expenses", href: "/expenses" },
@@ -32,7 +33,7 @@ function NavBar() {
               </Link>
             </div>
             <div className="hidden md:block">
-              {status !== "unauth" && (
+              {status !== "unauthenticated" && (
                 <nav aria-label="Global">
                   <ul className="flex items-center gap-6 text-sm">
                     {links.map((link) => (
@@ -52,7 +53,7 @@ function NavBar() {
               )}
             </div>
             <div className="flex items-center gap-4">
-              {status === "unauth" ? (
+              {status === "unauthenticated" ? (
                 <div className="sm:flex sm:gap-4">
                   <Link
                     className="rounded-md bg-blue-500 px-5 py-2.5 text-sm font-medium text-white shadow"
@@ -73,7 +74,7 @@ function NavBar() {
                 </div>
               )}
               <div className="block md:hidden">
-                {status !== "unauth" && (
+                {status !== "unauthenticated" && (
                   <button
                     className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
                     onClick={toggleMenu}
@@ -81,7 +82,7 @@ function NavBar() {
                     <Menu />
                   </button>
                 )}
-                {menuOpen && status !== "unauth" && (
+                {menuOpen && status !== "unauthenticated" && (
                   <div className="flex justify-center items-center absolute left-0 right-0 mt-2 bg-white z-50 h-screen text-2xl ">
                     <ul className="w-screen">
                       {links.map((link) => (
