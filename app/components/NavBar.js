@@ -4,6 +4,7 @@ import Link from "next/link";
 import { HandCoins, Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
 import {useState} from "react";
+import { signOut } from "next-auth/react";
 
 
 
@@ -62,12 +63,13 @@ function NavBar() {
                 </div>
               ) : (
                 <div className="sm:flex sm:gap-4">
-                  <Link
+                  <span
                     className="rounded-md bg-blue-500 px-5 py-2.5 text-sm font-medium text-white shadow"
                     href="/logout"
+                    onClick={signOut}
                   >
                     Logout
-                  </Link>
+                  </span>
                 </div>
               )}
               <div className="block md:hidden">
