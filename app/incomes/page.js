@@ -1,6 +1,23 @@
 import Link from "next/link";
+import {GET} from '../api/income/route'
 
-function IncomesPage() {
+const getData = async function () {
+  const res = await fetch("http://localhost:3000/api/income", {
+    cache: 'no-store'
+  });
+
+  if (!res.ok) {
+    throw new Error("failed");
+  }
+
+  return res.json();
+};
+
+async function IncomesPage() {
+  const data = await getData();
+  console.log(data)
+
+
   return (
     <>
       <button className="group relative inline-block text-sm font-medium text-indigo-600 focus:outline-none focus:ring active:text-indigo-500">
@@ -13,6 +30,9 @@ function IncomesPage() {
           </span>
         </Link>
       </button>
+      {data?.map((item) => (
+        <Link key={item.id} href={`incomes/${item.slug}`}>{item.title}</Link>
+      ))}
     </>
   );
 }

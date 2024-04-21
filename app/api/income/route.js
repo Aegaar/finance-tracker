@@ -17,7 +17,6 @@ export async function POST(NextRequest) {
     return NextResponse.json(validation.error.errors, { status: 400 });
   }
 
-
   const addIncome = await prisma.income.create({
     data: {
       title: body.title,
@@ -27,5 +26,19 @@ export async function POST(NextRequest) {
     },
   });
 
-  return NextResponse.json(addIncome, {status: 201})
+  return NextResponse.json(addIncome, { status: 201 });
+}
+
+export async function GET() {
+  try {
+    const incomes = await prisma.income.findMany();
+
+    return NextResponse.json(incomes, { status: 200 });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { message: "Something went wrong" },
+      { status: 500 }
+    );
+  }
 }

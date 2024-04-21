@@ -11,22 +11,28 @@ model Income {
   id          Int          @id @default(autoincrement())
   title       String       @db.VarChar(255)
   amount      Int
+  slug        String       @unique
   // incomeDate  DateTime
   description String       @db.Text
   source      IncomeSource @default(SALARY)
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
+  // userEmail   String
+  // user        User         @relation(fields: [userEmail], references: [email])
 }
 
 model Expense {
   id          Int           @id @default(autoincrement())
   title       String        @db.VarChar(255)
+  slug        String        @unique
   amount      Int
   // expenseDate  DateTime
   description String        @db.Text
   source      ExpenseSource @default(GROCERIES)
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
+  userEmail   String
+  user        User          @relation(fields: [userEmail], references: [email])
 }
 
 enum IncomeSource {
@@ -81,11 +87,13 @@ model Session {
 model User {
   id            String    @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String    @unique
   emailVerified DateTime? @map("email_verified")
   image         String?
   accounts      Account[]
   sessions      Session[]
+  // Income        Income[]
+  Expense       Expense[]
 
   @@map("users")
 }
