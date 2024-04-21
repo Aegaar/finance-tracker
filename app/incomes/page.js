@@ -1,9 +1,9 @@
 import Link from "next/link";
-import {GET} from '../api/income/route'
+import Pagination from "../components/Pagination";
 
-const getData = async function () {
-  const res = await fetch("http://localhost:3000/api/income", {
-    cache: 'no-store'
+const getData = async function (page) {
+  const res = await fetch(`http://localhost:3000/api/income?page=${page}`, {
+    cache: "no-store",
   });
 
   if (!res.ok) {
@@ -13,10 +13,14 @@ const getData = async function () {
   return res.json();
 };
 
-async function IncomesPage() {
-  const data = await getData();
-  console.log(data)
+async function IncomesPage({ searchParams }) {
+  const page = parseInt(searchParams.page) || 1;
+  const { count, incomes } = await getData(page);
 
+  const PAGINATION_NUMBER = 2;
+
+  const hasPrev = PAGINATION_NUMBER * (page - 1) > 0;
+  const hasNext = PAGINATION_NUMBER * (page - 1) + PAGINATION_NUMBER < count;
 
   return (
     <>
@@ -30,9 +34,12 @@ async function IncomesPage() {
           </span>
         </Link>
       </button>
-      {data?.map((item) => (
-        <Link key={item.id} href={`incomes/${item.slug}`}>{item.title}</Link>
+      {incomes?.map((item) => (
+        <Link key={item.id} href={`incomes/${item.slug}`}>
+          {item.title}
+        </Link>
       ))}
+      <Pagination page={page} hasPrev={hasPrev} hasNext={hasNext} />
     </>
   );
 }

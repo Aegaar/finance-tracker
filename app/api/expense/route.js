@@ -29,3 +29,17 @@ export async function POST(NextRequest) {
 
   return NextResponse.json(addExpense, {status: 201})
 }
+
+export async function GET() {
+  try {
+    const expenses = await prisma.expense.findMany();
+
+    return NextResponse.json(incomes, { status: 200 });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { message: "Something went wrong" },
+      { status: 500 }
+    );
+  }
+}

@@ -29,11 +29,25 @@ export async function POST(NextRequest) {
   return NextResponse.json(addIncome, { status: 201 });
 }
 
-export async function GET() {
-  try {
-    const incomes = await prisma.income.findMany();
+export async function GET(NextRequest) {
+  const { searchParams } = new URL(NextRequest.url);
 
-    return NextResponse.json(incomes, { status: 200 });
+  const page = searchParams.get("page");
+
+  const PAGINATION_NUMBER = 2;
+
+  const query = {
+    take: PAGINATION_NUMBER,
+    skip: PAGINATION_NUMBER * (page - 1),
+  };
+
+  try {
+    const [incomes, count] = await prisma.$transaction([
+      prisma.income.findMany(query),
+      prisma.income.count(),
+    ]);
+
+    return NextResponse.json({ incomes, count }, { status: 200 });
   } catch (error) {
     console.log(error);
     return NextResponse.json(
