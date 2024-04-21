@@ -17,8 +17,8 @@ model Income {
   source      IncomeSource @default(SALARY)
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
-  // userEmail   String
-  // user        User         @relation(fields: [userEmail], references: [email])
+  userEmail   String
+  user        User         @relation(fields: [userEmail], references: [email])
 }
 
 model Expense {
@@ -92,7 +92,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  // Income        Income[]
+  Income        Income[]
   Expense       Expense[]
 
   @@map("users")

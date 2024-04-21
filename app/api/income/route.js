@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import prisma from "../../../prisma/client";
+import { getAuthSession } from "../../utils/auth";
+const uniqueSlug = require("unique-slug");
 
 const createIncomeSchema = z.object({
   title: z.string().min(1).max(255),
@@ -10,8 +12,22 @@ const createIncomeSchema = z.object({
 });
 
 export async function POST(NextRequest) {
+  const session = await getAuthSession();
+
+  // console.log(session.user.email);
+
+  if (!session) {
+    return NextResponse.json({ message: "Not Authenticated" }, { status: 401 });
+  }
+
   const body = await NextRequest.json();
   const validation = createIncomeSchema.safeParse(body);
+
+
+
+  const incomeSlug = body.title + uniqueSlug();
+
+
 
   if (!validation.success) {
     return NextResponse.json(validation.error.errors, { status: 400 });
@@ -22,11 +38,42 @@ export async function POST(NextRequest) {
       title: body.title,
       description: body.description,
       amount: body.amount,
+      userEmail: session.user.email,
+      slug: incomeSlug
+
       // incomeDate: body.incomeDate,
     },
   });
 
-  return NextResponse.json(addIncome, { status: 201 });
+  return NextResponse.json(addIncome, { status: 200 });
+
+  // try {
+  //   const body = await NextRequest.json();
+  //   const validation = createIncomeSchema.safeParse(body);
+  //   const slug = title + uniqueSlug();
+
+  //   if (!validation.success) {
+  //     return NextResponse.json(validation.error.errors, { status: 400 });
+  //   }
+
+  //   const addIncome = await prisma.income.create({
+  //     data: {
+  //       title: body.title,
+  //       description: body.description,
+  //       amount: body.amount,
+  //       userEmail: session.user.email,
+  //       slug: slug,
+  //       // incomeDate: body.incomeDate,
+  //     },
+  //   });
+
+  //   return NextResponse.json(addIncome, { status: 201 });
+  // } catch (error) {
+  //   return NextResponse.json(
+  //     { message: "Something went wrong" },
+  //     { status: 500 }
+  //   );
+  // }
 }
 
 export async function GET(NextRequest) {
