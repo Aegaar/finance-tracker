@@ -2,16 +2,13 @@
 
 import Link from "next/link";
 import { HandCoins, Menu } from "lucide-react";
-import { usePathname } from "next/navigation";
-import {useState} from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 
-
-
-
 function NavBar() {
-  const {status} = useSession()
-
+  const { status } = useSession();
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen((prevState) => !prevState);
   const closeMenu = () => setMenuOpen(false);
@@ -21,6 +18,8 @@ function NavBar() {
     { name: "Expenses", href: "/expenses" },
     { name: "Dashboard", href: "/dashboard" },
   ];
+
+ 
 
   return (
     <>
@@ -41,7 +40,9 @@ function NavBar() {
                         <Link
                           href={link.href}
                           className={`"text-zinc-500 hover:text-zinc-800 transition-colors font-bold ${
-                            link.href === path ? "text-blue-500" : "text-zinc-400"
+                            link.href === path
+                              ? "text-blue-500"
+                              : "text-zinc-400"
                           }`}
                         >
                           {link.name}
@@ -66,7 +67,7 @@ function NavBar() {
                 <div className="sm:flex sm:gap-4">
                   <span
                     className="rounded-md bg-blue-500 px-5 py-2.5 text-sm font-medium text-white shadow"
-                    href="/logout"
+                    href="/"
                     onClick={signOut}
                   >
                     Logout
@@ -109,6 +110,3 @@ function NavBar() {
 }
 
 export default NavBar;
-
-
-

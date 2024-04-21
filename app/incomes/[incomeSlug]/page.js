@@ -1,9 +1,28 @@
 import React from "react";
 
-function SingleIncome({ params }) {
-  const income = params.incomeSlug
+const getData = async function (slug) {
+  // console.log(slug)
+  const res = await fetch(`http://localhost:3000/api/income/${slug}`, {
+    cache: "no-store",
+  });
 
-  return <div>{income}</div>;
+  if (!res.ok) {
+    throw new Error("failed");
+  }
+
+  return res.json();
+};
+
+async function SingleIncome({ params }) {
+  const slug = params.incomeSlug;
+
+  const income = await getData(slug);
+  return (
+    <div>
+      {income.title}
+      {income.source}
+    </div>
+  );
 }
 
 export default SingleIncome;
