@@ -19,7 +19,11 @@ function NavBar() {
     { name: "Dashboard", href: "/dashboard" },
   ];
 
- 
+  function handleSignOut() {
+    signOut({
+      callbackUrl: "/",
+    });
+  }
 
   return (
     <>
@@ -68,7 +72,7 @@ function NavBar() {
                   <span
                     className="rounded-md bg-blue-500 px-5 py-2.5 text-sm font-medium text-white shadow"
                     href="/"
-                    onClick={signOut}
+                    onClick={handleSignOut}
                   >
                     Logout
                   </span>
