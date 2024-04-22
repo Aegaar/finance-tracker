@@ -3,10 +3,13 @@ import Pagination from "../components/Pagination";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../utils/auth";
 import { redirect } from "next/dist/server/api-utils";
+import { headers } from "next/headers";
 
 const getData = async function (page) {
   const res = await fetch(`http://localhost:3000/api/income?page=${page}`, {
     cache: "no-store",
+    method: "GET",
+    headers: headers(),
   });
 
   if (!res.ok) {

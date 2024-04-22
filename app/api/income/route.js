@@ -3,6 +3,7 @@ import { z } from "zod";
 import prisma from "../../../prisma/client";
 import { getAuthSession } from "../../utils/auth";
 import { getServerSession } from "next-auth";
+import { authOptions } from "../../utils/auth";
 const uniqueSlug = require("unique-slug");
 
 const createIncomeSchema = z.object({
@@ -73,11 +74,11 @@ export async function POST(NextRequest) {
 }
 
 export async function GET(NextRequest) {
-  // const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
 
-  // if (!session) {
-  //   return NextResponse.json({ message: "You are not logged in" });
-  // }
+  if (!session) {
+    return NextResponse.json({ message: "You are not logged in" });
+  }
 
 
   const { searchParams } = new URL(NextRequest.url);
