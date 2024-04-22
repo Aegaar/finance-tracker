@@ -1,6 +1,26 @@
+"use client";
+
 import React from "react";
 
 function NewIncomePage() {
+  async function submitHandler(event) {
+
+    const formData = new FormData(event.currentTarget);
+
+    const newIncome = {
+      title: formData.get("title"),
+      amount: parseFloat(formData.get("amount")),
+      description: formData.get("description"),
+      source: formData.get("source"),
+    };
+
+
+     await fetch("http://localhost:3000/api/income", {
+      method: "POST",
+      body: JSON.stringify(newIncome),
+    })
+  }
+
   return (
     <section className="bg-white">
       <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
@@ -9,7 +29,11 @@ function NewIncomePage() {
             <h1 className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
               Add your income
             </h1>
-            <form className="mt-8 grid grid-cols-6 gap-6">
+            <form
+              method="POST"
+              className="mt-8 grid grid-cols-6 gap-6"
+              onSubmit={submitHandler}
+            >
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="title"
@@ -35,7 +59,7 @@ function NewIncomePage() {
                 </label>
 
                 <input
-                  type="text"
+                  type="number"
                   id="amount"
                   name="amount"
                   className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
@@ -60,73 +84,104 @@ function NewIncomePage() {
 
               <div className="col-span-6 sm:col-span-3">
                 <fieldset className="flex flex-wrap gap-3">
-                  <legend className="sr-only">Color</legend>
-
+                  <legend className="sr-only"></legend>
                   <div>
                     <label
-                      htmlFor="ColorBlack"
+                      htmlFor="salary"
                       className="flex cursor-pointer items-center justify-center rounded-md border border-gray-100 bg-white px-3 py-2 text-gray-900 hover:border-gray-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-500 has-[:checked]:text-white"
                     >
                       <input
                         type="radio"
-                        name="ColorOption"
-                        value="ColorBlack"
-                        id="ColorBlack"
+                        name="source"
+                        value="SALARY"
+                        id="salary"
                         className="sr-only"
                       />
 
-                      <p className="text-sm font-medium">Texas Tea</p>
+                      <p className="text-sm font-medium">Salary</p>
                     </label>
                   </div>
 
                   <div>
                     <label
-                      htmlFor="ColorRed"
+                      htmlFor="freelancing"
                       className="flex cursor-pointer items-center justify-center rounded-md border border-gray-100 bg-white px-3 py-2 text-gray-900 hover:border-gray-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-500 has-[:checked]:text-white"
                     >
                       <input
                         type="radio"
-                        name="ColorOption"
-                        value="ColorRed"
-                        id="ColorRed"
+                        name="source"
+                        value="FREELANCING"
+                        id="freelancing"
                         className="sr-only"
                       />
 
-                      <p className="text-sm font-medium">Fiesta Red</p>
+                      <p className="text-sm font-medium">Freelancing</p>
                     </label>
                   </div>
 
                   <div>
                     <label
-                      htmlFor="ColorBlue"
+                      htmlFor="investments"
                       className="flex cursor-pointer items-center justify-center rounded-md border border-gray-100 bg-white px-3 py-2 text-gray-900 hover:border-gray-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-500 has-[:checked]:text-white"
                     >
                       <input
                         type="radio"
-                        name="ColorOption"
-                        value="ColorBlue"
-                        id="ColorBlue"
+                        name="source"
+                        value="Investments"
+                        id="investments"
                         className="sr-only"
                       />
 
-                      <p className="text-sm font-medium">Cobalt Blue</p>
+                      <p className="text-sm font-medium">INVESTMENTS</p>
                     </label>
                   </div>
 
                   <div>
                     <label
-                      htmlFor="ColorGold"
+                      htmlFor="stocks"
                       className="flex cursor-pointer items-center justify-center rounded-md border border-gray-100 bg-white px-3 py-2 text-gray-900 hover:border-gray-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-500 has-[:checked]:text-white"
                     >
                       <input
                         type="radio"
-                        name="ColorOption"
-                        value="ColorGold"
-                        id="ColorGold"
+                        name="source"
+                        value="STOCKS"
+                        id="stocks"
                         className="sr-only"
                       />
 
-                      <p className="text-sm font-medium">Goldtop</p>
+                      <p className="text-sm font-medium">Stocks</p>
+                    </label>
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="bank_transfers"
+                      className="flex cursor-pointer items-center justify-center rounded-md border border-gray-100 bg-white px-3 py-2 text-gray-900 hover:border-gray-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-500 has-[:checked]:text-white"
+                    >
+                      <input
+                        type="radio"
+                        name="source"
+                        value="BANK_TRANSFERS"
+                        id="bank_transfers"
+                        className="sr-only"
+                      />
+
+                      <p className="text-sm font-medium">Bank transfers</p>
+                    </label>
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="other"
+                      className="flex cursor-pointer items-center justify-center rounded-md border border-gray-100 bg-white px-3 py-2 text-gray-900 hover:border-gray-200 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-500 has-[:checked]:text-white"
+                    >
+                      <input
+                        type="radio"
+                        name="source"
+                        value="OTHER"
+                        id="other"
+                        className="sr-only"
+                      />
+
+                      <p className="text-sm font-medium">other</p>
                     </label>
                   </div>
                 </fieldset>
