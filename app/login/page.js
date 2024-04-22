@@ -35,8 +35,9 @@ function page() {
       <div onClick={() => signIn("google", { callbackUrl: "/dashboard" })}>
         Sign up with Google
       </div>
-      <div>Sign up with Github</div>
-      <div>Sign up with Facebook</div>
+      <div onClick={() => signIn("github", { callbackUrl: "/dashboard" })}>
+        Sign up with Github
+      </div>
     </div>
   );
 }

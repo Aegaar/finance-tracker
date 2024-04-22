@@ -1,9 +1,17 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 function NewIncomePage() {
+  const { data: session } = useSession({
+    required: true,
+    // onUnauthenticated() {
+    //   redirect("/login");
+    // },
+  });
+
   const router = useRouter();
 
   async function submitHandler(event) {

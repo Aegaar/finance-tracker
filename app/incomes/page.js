@@ -1,5 +1,8 @@
 import Link from "next/link";
 import Pagination from "../components/Pagination";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../utils/auth";
+import { redirect } from "next/dist/server/api-utils";
 
 const getData = async function (page) {
   const res = await fetch(`http://localhost:3000/api/income?page=${page}`, {
@@ -14,6 +17,12 @@ const getData = async function (page) {
 };
 
 async function IncomesPage({ searchParams }) {
+  const session = await getServerSession(authOptions);
+
+  if(!session) {
+    redirect('/login')
+  }
+
   const page = parseInt(searchParams.page) || 1;
   const { count, incomes } = await getData(page);
 

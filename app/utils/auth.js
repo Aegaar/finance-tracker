@@ -16,6 +16,9 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_SECRET,
     }),
   ],
+  pages: {
+    signIn: "/login",
+  },
 };
 
 export const getAuthSession = () => getServerSession(authOptions);

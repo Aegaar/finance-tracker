@@ -1,9 +1,11 @@
 import React from "react";
+import { headers } from "next/headers"
 
 const getData = async function (slug) {
-  // console.log(slug)
   const res = await fetch(`http://localhost:3000/api/income/${slug}`, {
     cache: "no-store",
+    method: "GET",
+    headers: headers(),
   });
 
   if (!res.ok) {

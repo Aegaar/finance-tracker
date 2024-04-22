@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import prisma from "../../../prisma/client";
 import { getAuthSession } from "../../utils/auth";
+import { getServerSession } from "next-auth";
 const uniqueSlug = require("unique-slug");
 
 const createIncomeSchema = z.object({
@@ -23,11 +24,7 @@ export async function POST(NextRequest) {
   // const body = await NextRequest.json();
   // const validation = createIncomeSchema.safeParse(body);
 
-
-
   // const incomeSlug = body.title + uniqueSlug();
-
-
 
   // if (!validation.success) {
   //   return NextResponse.json(validation.error.errors, { status: 400 });
@@ -76,6 +73,13 @@ export async function POST(NextRequest) {
 }
 
 export async function GET(NextRequest) {
+  // const session = await getServerSession(authOptions);
+
+  // if (!session) {
+  //   return NextResponse.json({ message: "You are not logged in" });
+  // }
+
+
   const { searchParams } = new URL(NextRequest.url);
 
   const page = searchParams.get("page");
