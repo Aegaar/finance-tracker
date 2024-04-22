@@ -1,10 +1,13 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 
 function NewIncomePage() {
-  async function submitHandler(event) {
+  const router = useRouter();
 
+  async function submitHandler(event) {
+    event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
     const newIncome = {
@@ -14,11 +17,12 @@ function NewIncomePage() {
       source: formData.get("source"),
     };
 
-
-     await fetch("http://localhost:3000/api/income", {
+    await fetch("http://localhost:3000/api/income", {
       method: "POST",
       body: JSON.stringify(newIncome),
-    })
+    });
+
+    router.push("/incomes");
   }
 
   return (
