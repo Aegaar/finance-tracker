@@ -4,6 +4,7 @@ import prisma from "../../../prisma/client";
 import { getAuthSession } from "../../utils/auth";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../utils/auth";
+import { revalidatePath } from "next/cache";
 const uniqueSlug = require("unique-slug");
 
 const createIncomeSchema = z.object({
@@ -16,35 +17,9 @@ const createIncomeSchema = z.object({
 export async function POST(NextRequest) {
   const session = await getAuthSession();
 
-  // console.log(session.user.email);
-
   if (!session) {
     return NextResponse.json({ message: "Not Authenticated" }, { status: 401 });
   }
-
-  // const body = await NextRequest.json();
-  // const validation = createIncomeSchema.safeParse(body);
-
-  // const incomeSlug = body.title + uniqueSlug();
-
-  // if (!validation.success) {
-  //   return NextResponse.json(validation.error.errors, { status: 400 });
-  // }
-
-  // const addIncome = await prisma.income.create({
-  //   data: {
-  //     title: body.title,
-  //     description: body.description,
-  //     amount: body.amount,
-  //     userEmail: session.user.email,
-  //     slug: incomeSlug
-
-  //     // incomeDate: body.incomeDate,
-  //   },
-  // });
-
-  // return NextResponse.json(addIncome, { status: 200 });
-
   try {
     const body = await NextRequest.json();
     const validation = createIncomeSchema.safeParse(body);
@@ -63,7 +38,7 @@ export async function POST(NextRequest) {
         // incomeDate: body.incomeDate,
       },
     });
-
+    revalidatePath("/incomes");
     return NextResponse.json(addIncome, { status: 201 });
   } catch (error) {
     return NextResponse.json(
@@ -80,6 +55,7 @@ export async function GET(NextRequest) {
     return NextResponse.json({ message: "You are not logged in" });
   }
 
+  // console.log(session.user.email + userEmail)
 
   const { searchParams } = new URL(NextRequest.url);
 
@@ -91,8 +67,9 @@ export async function GET(NextRequest) {
     take: PAGINATION_NUMBER,
     skip: PAGINATION_NUMBER * (page - 1),
     orderBy: {
-      updatedAt: 'desc'
+      updatedAt: "desc",
     },
+    where: { userEmail: session.user.email },
   };
 
   try {

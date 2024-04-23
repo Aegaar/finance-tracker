@@ -5,12 +5,17 @@ import { redirect, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 function NewIncomePage() {
-  const { data: session } = useSession({
+  const { data: session, status } = useSession({
     required: true,
-    // onUnauthenticated() {
-    //   redirect("/login");
-    // },
   });
+
+  if (status === "loading") {
+    return <p>Loading...</p>;
+  }
+
+  if (status === "unauthenticated") {
+    return <p>Access Denied</p>;
+  }
 
   const router = useRouter();
 

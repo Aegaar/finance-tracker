@@ -34,8 +34,6 @@ function NavBar() {
               <Link href="/">
                 <HandCoins className="text-blue-500" size={44} />
               </Link>
-              <Link href="/incomes/new">incomes new</Link>
-              <Link href="/incomes/new">incomes</Link>
             </div>
             <div className="hidden md:block">
               {status !== "unauthenticated" && (

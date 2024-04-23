@@ -1,5 +1,8 @@
 import React from "react";
-import { headers } from "next/headers"
+import { headers } from "next/headers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../utils/auth";
+import { redirect } from "next/navigation";
 
 const getData = async function (slug) {
   const res = await fetch(`http://localhost:3000/api/income/${slug}`, {
@@ -16,6 +19,12 @@ const getData = async function (slug) {
 };
 
 async function SingleIncome({ params }) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect("/login");
+  }
+
   const slug = params.incomeSlug;
 
   const income = await getData(slug);
