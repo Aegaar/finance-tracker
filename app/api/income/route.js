@@ -72,10 +72,14 @@ export async function GET(NextRequest) {
     where: { userEmail: session.user.email },
   };
 
+
+
   try {
     const [incomes, count] = await prisma.$transaction([
       prisma.income.findMany(query),
-      prisma.income.count(),
+      prisma.income.count({
+        where: { userEmail: session.user.email },
+      }),
     ]);
 
     return NextResponse.json({ incomes, count }, { status: 200 });

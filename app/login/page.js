@@ -5,30 +5,16 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 function page() {
-  const { data, status } = useSession();
+  const { status } = useSession();
   const router = useRouter();
-
-  // TODO FIND A ANOTHER WAY TO REPAIR A PATH REVALIDATE
 
   if (status === "loading") {
     return <div>loading...</div>;
   }
 
-  // useEffect(() => {
-  // if (status === "authenticated") {
-  //   router.push("/");
-  // }
-  // }, [status, router]);
-
-  // console.log(status, data);
-
-  // if (status === "loading") {
-  //   return <div>Loading...</div>;
-  // }
-
-  // if (status === "authenticated") {
-  //   router.push("/")
-  // }
+  if (status === "authenticated") {
+    router.push("/");
+  }
 
   return (
     <div>
