@@ -4,15 +4,16 @@ import prisma from "../../../prisma/client";
 import { getAuthSession } from "../../utils/auth";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../utils/auth";
-import { revalidatePath } from "next/cache";
+import { createIncomeSchema } from "../../utils/validationSchema";
+
 const uniqueSlug = require("unique-slug");
 
-const createIncomeSchema = z.object({
-  title: z.string().min(1).max(255),
-  description: z.string().min(1),
-  amount: z.number().positive(),
-  // incomeDate: z.string().datetime(),
-});
+// const createIncomeSchema = z.object({
+//   title: z.string().min(1).max(255),
+//   description: z.string().min(1),
+//   amount: z.number().positive(),
+//   // incomeDate: z.string().datetime(),
+// });
 
 export async function POST(NextRequest) {
   const session = await getAuthSession();
@@ -25,7 +26,7 @@ export async function POST(NextRequest) {
     const validation = createIncomeSchema.safeParse(body);
     const incomeSlug = body.title + uniqueSlug();
     if (!validation.success) {
-      return NextResponse.json(validation.error.errors, { status: 400 });
+      return NextResponse.json(validation.error.errors, { status: 400 }, {message: "Invalid data"});
     }
 
     const addIncome = await prisma.income.create({
@@ -38,7 +39,7 @@ export async function POST(NextRequest) {
         // incomeDate: body.incomeDate,
       },
     });
-    revalidatePath("/incomes");
+
     return NextResponse.json(addIncome, { status: 201 });
   } catch (error) {
     return NextResponse.json(
@@ -71,8 +72,6 @@ export async function GET(NextRequest) {
     },
     where: { userEmail: session.user.email },
   };
-
-
 
   try {
     const [incomes, count] = await prisma.$transaction([

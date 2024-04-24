@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../utils/auth";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
-
+import useSWR from "swr";
 
 const getData = async function (page) {
   const res = await fetch(`http://localhost:3000/api/income?page=${page}`, {
