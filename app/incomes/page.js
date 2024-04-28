@@ -1,15 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import Pagination from "../components/Pagination";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../utils/auth";
-import { redirect } from "next/navigation";
-import { headers } from "next/headers";
+import { useSession } from "next-auth/react";
 import useSWR from "swr";
 
-const getData = async function (page) {
-  const res = await fetch(`http://localhost:3000/api/income?page=${page}`, {
+async function fetcher(url) {
+  const res = await fetch(url, {
     method: "GET",
-    headers: headers(),
   });
 
   if (!res.ok) {
@@ -17,22 +15,39 @@ const getData = async function (page) {
   }
 
   return res.json();
-};
+}
 
-async function IncomesPage({ searchParams }) {
-  const session = await getServerSession(authOptions);
+function IncomesPage({ searchParams }) {
+  const page = parseInt(searchParams.page) || 1;
 
-  if(!session) {
-    redirect('/login')
+  const { data, error } = useSWR(
+    `http://localhost:3000/api/income?page=${page}`,
+    fetcher
+  );
+
+  const { data: session, status } = useSession({
+    required: true,
+  });
+
+  if (status === "loading") {
+    return <p>Loading...</p>;
   }
 
-  const page = parseInt(searchParams.page) || 1;
-  const { count, incomes } = await getData(page);
+  if (status === "unauthenticated") {
+    return <p>Access Denied</p>;
+  }
+
+  const incomes = data?.incomes || [];
 
   const PAGINATION_NUMBER = 2;
 
+  const count = data?.count || 0;
+
   const hasPrev = PAGINATION_NUMBER * (page - 1) > 0;
   const hasNext = PAGINATION_NUMBER * (page - 1) + PAGINATION_NUMBER < count;
+
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
 
   return (
     <>
