@@ -1,18 +1,20 @@
 "use client";
 
 import React from "react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { createIncomeSchema } from "../../utils/validationSchema";
 import { useState } from "react";
-import { revalidatePath } from "next/cache";
+// import { revalidatePath } from "next/cache";
+import Message from "../../components/Message";
 
 function NewIncomePage() {
-  const [invalidInput, setInvalidInput] = useState(false);
+  const [error, setError] = useState({ message: undefined });
+  const [open, setOpen] = useState(false);
   const { data: session, status } = useSession({
     required: true,
   });
-
+  const router = useRouter();
   if (status === "loading") {
     return <p>Loading...</p>;
   }
@@ -20,8 +22,6 @@ function NewIncomePage() {
   if (status === "unauthenticated") {
     return <p>Access Denied</p>;
   }
-
-  const router = useRouter();
 
   async function submitHandler(event) {
     event.preventDefault();
@@ -37,25 +37,40 @@ function NewIncomePage() {
     const validation = createIncomeSchema.safeParse(newIncome);
 
     if (!validation.success) {
-      setInvalidInput(true);
+      setError({ message: "Invalid form data" });
       return;
     }
 
-    if (!validation.success) {
-      setInvalidInput(false);
+    if (validation.success) {
+      setError({ message: undefined });
     }
 
-    await fetch("http://localhost:3000/api/income", {
-      method: "POST",
-      body: JSON.stringify(newIncome),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      const response = await fetch("http://localhost:3000/api/income", {
+        method: "POST",
+        body: JSON.stringify(newIncome),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    router.refresh("/incomes");
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Something went wrong");
+      }
+
+      setOpen(true);
+
+      setTimeout(() => {
+        setOpen(false);
+      }, 5000);
+
+      router.refresh("/incomes");
+    } catch (error) {
+      setOpen(false);
+      setError({ message: error.message || "Something went wrong" });
+    }
   }
-
   return (
     <section className="bg-white flex items-center justify-center min-h-screen">
       <div className="container mx-auto">
@@ -64,6 +79,9 @@ function NewIncomePage() {
             <h1 className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
               Add your income
             </h1>
+            {open && (
+              <Message text="Income added successfully" timeout={55000} props />
+            )}
             <form
               method="POST"
               className="mt-8 grid grid-cols-6 gap-6"
@@ -130,6 +148,7 @@ function NewIncomePage() {
                       className="flex cursor-pointer items-center justify-center rounded-md border-2 border-gray-400 bg-white px-3 py-2 text-gray-900 hover:text-blue-500 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-500 has-[:checked]:text-white"
                     >
                       <input
+                        defaultChecked
                         type="radio"
                         name="source"
                         value="SALARY"
@@ -230,10 +249,10 @@ function NewIncomePage() {
                   Add
                 </button>
               </div>
-              {invalidInput && (
-                  <p className="text-red-500">
-                  Invalid input data
-                </p>
+              {error.message && (
+                <div className="flex justify-center col-span-6">
+                  <p className="text-red-500">{error.message}</p>
+                </div>
               )}
             </form>
           </div>

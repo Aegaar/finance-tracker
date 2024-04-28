@@ -26,7 +26,10 @@ export async function POST(NextRequest) {
     const validation = createIncomeSchema.safeParse(body);
     const incomeSlug = body.title + uniqueSlug();
     if (!validation.success) {
-      return NextResponse.json(validation.error.errors, { status: 400 }, {message: "Invalid data"});
+      return NextResponse.json(
+        { message: "Invalid data" },
+        { status: 400 }
+      );
     }
 
     const addIncome = await prisma.income.create({
