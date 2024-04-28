@@ -3,7 +3,6 @@ import prisma from "../../../../prisma/client";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../../utils/auth";
 import { getAuthSession } from "../../../utils/auth";
-// import { revalidatePath } from "next/cache";
 
 export async function GET(req, { params }) {
   const session = await getServerSession(authOptions);
@@ -36,12 +35,14 @@ export async function DELETE(NextRequest, { params }) {
 
   try {
     const deletedIncome = await prisma.income.delete({
-      where: {slug: slug, userEmail: session.user.email}
+      where: { slug: slug, userEmail: session.user.email },
     });
 
-    // revalidatePath("/incomes", "layout")
     return NextResponse.json(deletedIncome, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ message: "Something went wrong" }, { status: 500 });
+    return NextResponse.json(
+      { message: "Something went wrong" },
+      { status: 500 }
+    );
   }
 }

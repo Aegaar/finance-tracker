@@ -1,9 +1,11 @@
-import React from 'react'
+import FinancialChart from '../components/FinancialChart'
+
 
 function DashboardPage() {
-  return (
+  return <>
     <div>Dashboard</div>
-  )
+    <FinancialChart/>
+  </>;
 }
 
-export default DashboardPage
+export default DashboardPage;

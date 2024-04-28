@@ -26,10 +26,7 @@ export async function POST(NextRequest) {
     const validation = createIncomeSchema.safeParse(body);
     const incomeSlug = body.title + uniqueSlug();
     if (!validation.success) {
-      return NextResponse.json(
-        { message: "Invalid data" },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: "Invalid data" }, { status: 400 });
     }
 
     const addIncome = await prisma.income.create({
@@ -56,7 +53,10 @@ export async function GET(NextRequest) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return NextResponse.json({ message: "You are not logged in" });
+    return NextResponse.json(
+      { message: "Not Authenticated" },
+      { status: 401 }
+    );
   }
 
   // console.log(session.user.email + userEmail)
