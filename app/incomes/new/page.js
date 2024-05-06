@@ -187,7 +187,7 @@ function NewIncomePage() {
                       <input
                         type="radio"
                         name="source"
-                        value="Investments"
+                        value="INVESTMENTS"
                         id="investments"
                         className="sr-only"
                       />

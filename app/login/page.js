@@ -3,190 +3,147 @@
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React from "react";
+import Image from "next/image";
 
 function page() {
-  const { status } = useSession();
-  const router = useRouter();
+  // const { status } = useSession();
+  // const router = useRouter();
 
-  if (status === "loading") {
-    return <div>loading...</div>;
-  }
+  // if (status === "loading") {
+  //   return <div>loading...</div>;
+  // }
 
-  if (status === "authenticated") {
-    router.push("/");
-  }
-
- 
+  // if (status === "authenticated") {
+  //   router.push("/");
+  // }
 
   return (
-   
+    // <div>
+    //   <div onClick={() => signIn("google", { callbackUrl: "/dashboard" })}>
+    //     Sign up with Google
+    //   </div>
+    //   <div onClick={() => signIn("github", { callbackUrl: "/dashboard" })}>
+    //     Sign up with Github
+    //   </div>
+    // </div>
 
-  <div>
-      <div onClick={() => signIn("google", { callbackUrl: "/dashboard" })}>
-        Sign up with Google
-      </div>
-      <div onClick={() => signIn("github", { callbackUrl: "/dashboard" })}>
-        Sign up with Github
+    <div className="min-h-screen text-black flex justify-center">
+      <div className="max-w-screen-xl m-0 sm:m-10 bg-white flex justify-center flex-1">
+        <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
+          <div className="mt-12 flex flex-col items-center">
+            <h1 className="text-2xl xl:text-3xl font-extrabold">Login</h1>
+            <div className="w-full flex-1 mt-8">
+              <div className="flex flex-col items-center">
+                <button
+                  onClick={() =>
+                    signIn("google", { callbackUrl: "/dashboard" })
+                  }
+                  className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-blue-500 text-white flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
+                >
+                  <div className="bg-white p-2 rounded-full">
+                    <svg className="w-4" viewBox="0 0 533.5 544.3">
+                      <path
+                        d="M533.5 278.4c0-18.5-1.5-37.1-4.7-55.3H272.1v104.8h147c-6.1 33.8-25.7 63.7-54.4 82.7v68h87.7c51.5-47.4 81.1-117.4 81.1-200.2z"
+                        fill="#4285f4"
+                      />
+                      <path
+                        d="M272.1 544.3c73.4 0 135.3-24.1 180.4-65.7l-87.7-68c-24.4 16.6-55.9 26-92.6 26-71 0-131.2-47.9-152.8-112.3H28.9v70.1c46.2 91.9 140.3 149.9 243.2 149.9z"
+                        fill="#34a853"
+                      />
+                      <path
+                        d="M119.3 324.3c-11.4-33.8-11.4-70.4 0-104.2V150H28.9c-38.6 76.9-38.6 167.5 0 244.4l90.4-70.1z"
+                        fill="#fbbc04"
+                      />
+                      <path
+                        d="M272.1 107.7c38.8-.6 76.3 14 104.4 40.8l77.7-77.7C405 24.6 339.7-.8 272.1 0 169.2 0 75.1 58 28.9 150l90.4 70.1c21.5-64.5 81.8-112.4 152.8-112.4z"
+                        fill="#ea4335"
+                      />
+                    </svg>
+                  </div>
+                  <span className="ml-4">Login with Google</span>
+                </button>
+
+                <button
+                  onClick={() =>
+                    signIn("github", { callbackUrl: "/dashboard" })
+                  }
+                  className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-blue-500 text-white flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline mt-5"
+                >
+                  <div className="bg-white p-1 rounded-full">
+                    <svg className="w-6" viewBox="0 0 32 32">
+                      <path
+                        fillRule="evenodd"
+                        d="M16 4C9.371 4 4 9.371 4 16c0 5.3 3.438 9.8 8.207 11.387.602.11.82-.258.82-.578 0-.286-.011-1.04-.015-2.04-3.34.723-4.043-1.609-4.043-1.609-.547-1.387-1.332-1.758-1.332-1.758-1.09-.742.082-.726.082-.726 1.203.086 1.836 1.234 1.836 1.234 1.07 1.836 2.808 1.305 3.492 1 .11-.777.422-1.305.762-1.605-2.664-.301-5.465-1.332-5.465-5.93 0-1.313.469-2.383 1.234-3.223-.121-.3-.535-1.523.117-3.175 0 0 1.008-.32 3.301 1.23A11.487 11.487 0 0116 9.805c1.02.004 2.047.136 3.004.402 2.293-1.55 3.297-1.23 3.297-1.23.656 1.652.246 2.875.12 3.175.77.84 1.231 1.91 1.231 3.223 0 4.61-2.804 5.621-5.476 5.922.43.367.812 1.101.812 2.219 0 1.605-.011 2.898-.011 3.293 0 .32.214.695.824.578C24.566 25.797 28 21.3 28 16c0-6.629-5.371-12-12-12z"
+                      />
+                    </svg>
+                  </div>
+                  <span className="ml-4">Login with GitHub</span>
+                </button>
+              </div>
+
+              <div className="my-12 border-b text-center">
+                <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
+                  Or sign up with e-mail
+                </div>
+              </div>
+
+              <div className="mx-auto max-w-xs">
+                <input
+                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                  type="email"
+                  placeholder="Email"
+                />
+                <input
+                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                  type="password"
+                  placeholder="Password"
+                />
+                <button className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                  <svg
+                    className="w-6 h-6 -ml-2"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                    <circle cx="8.5" cy="7" r="4" />
+                    <path d="M20 8v6M23 11h-6" />
+                  </svg>
+                  <span className="ml-3">Sign Up</span>
+                </button>
+                <p className="mt-6 text-xs text-gray-600 text-center">
+                  I agree to abide by templatana's
+                  <a
+                    href="#"
+                    className="border-b border-gray-500 border-dotted"
+                  >
+                    Terms of Service
+                  </a>
+                  and its
+                  <a
+                    href="#"
+                    className="border-b border-gray-500 border-dotted"
+                  >
+                    Privacy Policy
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex-1 bg-white text-center hidden lg:flex">
+          <Image
+            src="/login-image.svg"
+            width={600}
+            height={600}
+            alt="login image"
+          />
+        </div>
       </div>
     </div>
-    );
+  );
 }
 
 export default page;
-
-    {/* <section class="h-screen overflow-hidden">
-  <div class="h-full overflow-hidden">
-   
-    <div
-      class="flex h-full flex-wrap items-center justify-center lg:justify-between">
-      <div
-        class="shrink-1 mb-12 grow-0 basis-auto md:mb-0 md:w-9/12 md:shrink-0 lg:w-6/12 xl:w-6/12">
-        <img
-          src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-          class="w-full"
-          alt="Sample image" />
-      </div>
-
-     
-      <div class="mb-12 md:mb-0 md:w-8/12 lg:w-5/12 xl:w-5/12">
-        <form>
-      
-          <div
-            class="flex flex-row items-center justify-center lg:justify-start">
-            <p class="mb-0 me-4 text-lg">Sign in with</p>
-
- 
-            <button
-              type="button"
-              data-twe-ripple-init
-              data-twe-ripple-color="light"
-              class=" mx-1 inline-block h-9 w-9 rounded-full bg-primary fill-white p-2 uppercase leading-normal shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">
-     
-              <span class="[&>svg]:mx-auto [&>svg]:h-3.5 [&>svg]:w-3.5">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 320 512">
-          
-                  <path
-                    d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
-                </svg>
-              </span>
-            </button>
-
-   
-            <button
-              type="button"
-              data-twe-ripple-init
-              data-twe-ripple-color="light"
-              class=" mx-1 inline-block h-9 w-9 rounded-full bg-primary fill-white p-2 uppercase leading-normal shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">
-     
-              <span class="[&>svg]:mx-auto [&>svg]:h-3.5 [&>svg]:w-3.5">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 512 512">
-              
-                  <path
-                    d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
-                </svg>
-              </span>
-            </button>
-
-       
-            <button
-              type="button"
-              data-twe-ripple-init
-              data-twe-ripple-color="light"
-              class=" mx-1 inline-block h-9 w-9 rounded-full bg-primary fill-white p-2 uppercase leading-normal shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">
-        
-              <span class="[&>svg]:mx-auto [&>svg]:h-3.5 [&>svg]:w-3.5">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 448 512">
-            
-                  <path
-                    d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z" />
-                </svg>
-              </span>
-            </button>
-          </div>
-
-    
-          <div
-            class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300 dark:before:border-neutral-500 dark:after:border-neutral-500">
-            <p
-              class="mx-4 mb-0 text-center font-semibold dark:text-white">
-              Or
-            </p>
-          </div>
-
-       
-          <div class="relative mb-6" data-twe-input-wrapper-init>
-            <input
-              type="text"
-              class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
-              id="exampleFormControlInput2"
-              placeholder="Email address" />
-            <label
-              for="exampleFormControlInput2"
-              class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[twe-input-state-active]:-translate-y-[1.15rem] peer-data-[twe-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-400 dark:peer-focus:text-primary"
-              >Email address
-            </label>
-          </div>
-
-    
-          <div class="relative mb-6" data-twe-input-wrapper-init>
-            <input
-              type="password"
-              class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
-              id="exampleFormControlInput22"
-              placeholder="Password" />
-            <label
-              for="exampleFormControlInput22"
-              class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[twe-input-state-active]:-translate-y-[1.15rem] peer-data-[twe-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-400 dark:peer-focus:text-primary"
-              >Password
-            </label>
-          </div>
-
-          <div class="mb-6 flex items-center justify-between">
-        
-            <div class="mb-[0.125rem] block min-h-[1.5rem] ps-[1.5rem]">
-              <input
-                class="relative float-left -ms-[1.5rem] me-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] appearance-none rounded-[0.25rem] border-[0.125rem] border-solid border-secondary-500 outline-none before:pointer-events-none before:absolute before:h-[0.875rem] before:w-[0.875rem] before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-checkbox before:shadow-transparent before:content-[''] checked:border-primary checked:bg-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:-mt-px checked:after:ms-[0.25rem] checked:after:block checked:after:h-[0.8125rem] checked:after:w-[0.375rem] checked:after:rotate-45 checked:after:border-[0.125rem] checked:after:border-l-0 checked:after:border-t-0 checked:after:border-solid checked:after:border-white checked:after:bg-transparent checked:after:content-[''] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-black/60 focus:shadow-none focus:transition-[border-color_0.2s] focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-black/60 focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-[0.875rem] focus:after:w-[0.875rem] focus:after:rounded-[0.125rem] focus:after:content-[''] checked:focus:before:scale-100 checked:focus:before:shadow-checkbox checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:after:-mt-px checked:focus:after:ms-[0.25rem] checked:focus:after:h-[0.8125rem] checked:focus:after:w-[0.375rem] checked:focus:after:rotate-45 checked:focus:after:rounded-none checked:focus:after:border-[0.125rem] checked:focus:after:border-l-0 checked:focus:after:border-t-0 checked:focus:after:border-solid checked:focus:after:border-white checked:focus:after:bg-transparent rtl:float-right dark:border-neutral-400 dark:checked:border-primary dark:checked:bg-primary"
-                type="checkbox"
-                value=""
-                id="exampleCheck2" />
-              <label
-                class="inline-block ps-[0.15rem] hover:cursor-pointer"
-                for="exampleCheck2">
-                Remember me
-              </label>
-            </div>
-
-            <a href="#!">Forgot password?</a>
-          </div>
-
-   
-          <div class="text-center lg:text-left">
-            <button
-              type="button"
-              class="inline-block w-full rounded bg-primary px-7 pb-2 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-              data-twe-ripple-init
-              data-twe-ripple-color="light">
-              Login
-            </button>
-
-            <p class="mb-0 mt-2 pt-1 text-sm font-semibold">
-              Don't have an account?
-              <a
-                href="#!"
-                class="text-danger transition duration-150 ease-in-out hover:text-danger-600 focus:text-danger-600 active:text-danger-700"
-                >Register</a
-              >
-            </p>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section></> */}
-

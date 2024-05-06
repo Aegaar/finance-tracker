@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import { HandCoins, Menu } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname} from "next/navigation";
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 
 function NavBar() {
-  const { status } = useSession();
-  const router = useRouter();
+  const { status, data: session } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen((prevState) => !prevState);
   const closeMenu = () => setMenuOpen(false);
@@ -78,6 +78,20 @@ function NavBar() {
                   </span>
                 </div>
               )}
+              {status !== "loading" && (
+                <Link href="/">
+                  <Image
+                    src={session.user.image}
+                    width={35}
+                    height={35}
+                    alt="user image"
+                    style={{
+                      objectFit: "cover",
+                      borderRadius: "100px",
+                    }}
+                  />
+                </Link>
+              )}
               <div className="block md:hidden">
                 {status !== "unauthenticated" && (
                   <button
@@ -87,6 +101,7 @@ function NavBar() {
                     <Menu />
                   </button>
                 )}
+
                 {menuOpen && status !== "unauthenticated" && (
                   <div className="flex justify-center items-center absolute left-0 right-0 mt-2 bg-white z-50 h-screen text-2xl ">
                     <ul className="w-screen">
