@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import useSWR from "swr";
-// import { useSession } from "next-auth/react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -23,17 +22,14 @@ ChartJS.register(
   Legend
 );
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+// const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function FinancialChart() {
-  // const { data: session, status } = useSession({
-  //   required: true,
-  // });
 
-  const { data, error } = useSWR(
-    `http://localhost:3000/api/dashboard`,
-    fetcher
-  );
+  // const { data, error } = useSWR(
+  //   `http://localhost:3000/api/dashboard`,
+  //   fetcher
+  // );
 
   const [chartData, setSCharData] = useState({
     datasets: [],
@@ -74,16 +70,6 @@ function FinancialChart() {
   }, []);
 
   const [chartOptions, setChartOptions] = useState({});
-
-  // if (status === "loading") {
-  //   return <p>Loading...</p>;
-  // }
-
-  // if (status === "unauthenticated") {
-  //   return <p>Access Denied</p>;
-  // }
-
-  // console.log(data);
 
   // if (error) return <div>Failed to load</div>;
   // if (!data) return <div>Loading...</div>;
