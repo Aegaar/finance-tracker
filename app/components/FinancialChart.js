@@ -1,8 +1,5 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import useSWR from "swr";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -22,57 +19,54 @@ ChartJS.register(
   Legend
 );
 
-// const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
-function FinancialChart() {
-
-  // const { data, error } = useSWR(
-  //   `http://localhost:3000/api/dashboard`,
-  //   fetcher
-  // );
-
-  const [chartData, setSCharData] = useState({
+function FinancialChart({ items, title, text }) {
+  const [chartData, setCharData] = useState({
+    labels: [],
     datasets: [],
   });
 
   useEffect(() => {
-    setSCharData({
-      labels: [
-        "Salary",
-        "Freelancing",
-        "Investments",
-        "Stocks",
-        "Bank transfers",
-        "other",
-      ],
+    const itemsBySource = {};
+
+    items.forEach((item) => {
+      if (!itemsBySource[item.source]) {
+        itemsBySource[item.source] = item.amount;
+      } else {
+        itemsBySource[item.source] += item.amount;
+      }
+    });
+    const chartDataArray = Object.entries(itemsBySource).map(
+      ([source, amount]) => ({
+        source,
+        amount,
+      })
+    );
+    setCharData({
+      labels: chartDataArray.map((data) => data.source),
       datasets: [
         {
-          label: "Incomes",
-          data: [118127, 22201, 19490, 17938, 24182, 17842, 22475],
+          label: title,
+          data: chartDataArray.map((data) => data.amount),
           borderColor: "rgb(53, 162, 235)",
-          backgroundColor: "rgb(53, 162, 235, 0.4",
+          backgroundColor: "rgb(53, 162, 235, 0.4)",
         },
       ],
     });
-    setChartOptions({
-      plugins: {
-        legend: {
-          position: "top",
-        },
-        title: {
-          display: true,
-          text: "Total income from a given source",
-        },
+  }, [items]);
+
+  const chartOptions = {
+    plugins: {
+      legend: {
+        position: "top",
       },
-      maintainAspectRatio: false,
-      responsive: true,
-    });
-  }, []);
-
-  const [chartOptions, setChartOptions] = useState({});
-
-  // if (error) return <div>Failed to load</div>;
-  // if (!data) return <div>Loading...</div>;
+      title: {
+        display: true,
+        text: text,
+      },
+    },
+    maintainAspectRatio: false,
+    responsive: true,
+  };
 
   return (
     <>
