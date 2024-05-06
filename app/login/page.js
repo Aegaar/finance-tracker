@@ -5,40 +5,33 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import Image from "next/image";
 
+
 function page() {
-  // const { status } = useSession();
-  // const router = useRouter();
+  const { status } = useSession();
+  const router = useRouter();
 
-  // if (status === "loading") {
-  //   return <div>loading...</div>;
-  // }
+  if (status === "loading") {
+    return <div>loading...</div>;
+  }
 
-  // if (status === "authenticated") {
-  //   router.push("/");
-  // }
+  if (status === "authenticated") {
+    router.push("/");
+  }
 
   return (
-    // <div>
-    //   <div onClick={() => signIn("google", { callbackUrl: "/dashboard" })}>
-    //     Sign up with Google
-    //   </div>
-    //   <div onClick={() => signIn("github", { callbackUrl: "/dashboard" })}>
-    //     Sign up with Github
-    //   </div>
-    // </div>
-
     <div className="min-h-screen text-black flex justify-center">
-      <div className="max-w-screen-xl m-0 sm:m-10 bg-white flex justify-center flex-1">
-        <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
-          <div className="mt-12 flex flex-col items-center">
-            <h1 className="text-2xl xl:text-3xl font-extrabold">Login</h1>
-            <div className="w-full flex-1 mt-8">
-              <div className="flex flex-col items-center">
+      <div className="max-w-screen-xl m-0 sm:m-10 bg-white flex flex-col lg:flex-row justify-center align-middle">
+        <div className="lg:w-1/2 xl:w-5/12 px-6 sm:p-12 flex flex-col items-center justify-center  ">
+          <h1 className="text-2xl xl:text-3xl text-center font-bold pb-10 lx:px-5">Login to control your budget with ease</h1>
+          <div className="flex flex-col items-center  ">
+            <h2 className="text-xl xl:text-2xl text-center">Select login options </h2>
+            <div className="w-full flex-1 mt-8  ">
+              <div className="flex flex-col items-center ">
                 <button
                   onClick={() =>
                     signIn("google", { callbackUrl: "/dashboard" })
                   }
-                  className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-blue-500 text-white flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
+                  className="w-full max-w-xs font-bold shadow-sm rounded-2xl py-3 bg-blue-500 text-white flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline mx-7"
                 >
                   <div className="bg-white p-2 rounded-full">
                     <svg className="w-4" viewBox="0 0 533.5 544.3">
@@ -67,7 +60,7 @@ function page() {
                   onClick={() =>
                     signIn("github", { callbackUrl: "/dashboard" })
                   }
-                  className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-blue-500 text-white flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline mt-5"
+                  className="w-full max-w-xs font-bold shadow-sm rounded-2xl  py-3 bg-blue-500 text-white flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline mt-5 mx-7"
                 >
                   <div className="bg-white p-1 rounded-full">
                     <svg className="w-6" viewBox="0 0 32 32">
@@ -80,60 +73,10 @@ function page() {
                   <span className="ml-4">Login with GitHub</span>
                 </button>
               </div>
-
-              <div className="my-12 border-b text-center">
-                <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
-                  Or sign up with e-mail
-                </div>
-              </div>
-
-              <div className="mx-auto max-w-xs">
-                <input
-                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                  type="email"
-                  placeholder="Email"
-                />
-                <input
-                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                  type="password"
-                  placeholder="Password"
-                />
-                <button className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-                  <svg
-                    className="w-6 h-6 -ml-2"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                    <circle cx="8.5" cy="7" r="4" />
-                    <path d="M20 8v6M23 11h-6" />
-                  </svg>
-                  <span className="ml-3">Sign Up</span>
-                </button>
-                <p className="mt-6 text-xs text-gray-600 text-center">
-                  I agree to abide by templatana's
-                  <a
-                    href="#"
-                    className="border-b border-gray-500 border-dotted"
-                  >
-                    Terms of Service
-                  </a>
-                  and its
-                  <a
-                    href="#"
-                    className="border-b border-gray-500 border-dotted"
-                  >
-                    Privacy Policy
-                  </a>
-                </p>
-              </div>
             </div>
           </div>
         </div>
-        <div className="flex-1 bg-white text-center hidden lg:flex">
+        <div className=" bg-white text-center flex">
           <Image
             src="/login-image.svg"
             width={600}

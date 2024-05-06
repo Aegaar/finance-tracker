@@ -78,7 +78,7 @@ function NavBar() {
                   </span>
                 </div>
               )}
-              {status !== "loading" && (
+              {(status !== "loading" && status === 'authenticated') && (
                 <Link href="/">
                   <Image
                     src={session.user.image}
