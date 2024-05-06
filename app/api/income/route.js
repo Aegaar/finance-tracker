@@ -36,6 +36,7 @@ export async function POST(NextRequest) {
         amount: body.amount,
         userEmail: session.user.email,
         slug: incomeSlug,
+        source: body.source
         // incomeDate: body.incomeDate,
       },
     });

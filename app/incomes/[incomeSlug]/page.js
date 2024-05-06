@@ -56,6 +56,7 @@ function SingleIncome({ params }) {
     <div>
       {data.title}
       {data.source}
+      {data.amount}
       <button onClick={deleteHandler}>Delete income</button>
     </div>
   );

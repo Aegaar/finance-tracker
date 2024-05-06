@@ -10,39 +10,51 @@ export async function GET() {
     return NextResponse.json({ message: "Not Authenticated" }, { status: 401 });
   }
   try {
-    const [incomes, expense, sumIncomes, sumExpenses] =
+    const [incomes, expenses, sumIncomes, sumExpenses] =
       await prisma.$transaction([
         prisma.income.findMany({
           select: {
+            id: true,
             amount: true,
+            source: true,
+            createdAt: true,
           },
           where: {
-            userEmail: session.user.email
-          }
+            userEmail: session.user.email,
+          },
+          orderBy: {
+            createdAt: "desc",
+          },
         }),
         prisma.expense.findMany({
           select: {
+            id: true,
             amount: true,
+            source: true,
+            createdAt: true,
           },
           where: {
-            userEmail: session.user.email
-          }
+            userEmail: session.user.email,
+          },
+          orderBy: {
+            createdAt: "desc",
+          },
         }),
         prisma.income.aggregate({
           _sum: {
             amount: true,
           },
           where: {
-            userEmail: session.user.email
-          }
+            userEmail: session.user.email,
+          },
         }),
         prisma.expense.aggregate({
           _sum: {
             amount: true,
           },
           where: {
-            userEmail: session.user.email
-          }
+            userEmail: session.user.email,
+          },
         }),
       ]);
 
@@ -51,8 +63,15 @@ export async function GET() {
 
     const total = totalIncomes - totalExpenses;
 
+    const lastAddedItems = [
+      ...incomes.map((item) => ({ ...item, type: "income" })),
+      ...expenses.map((item) => ({ ...item, type: "expense" })),
+    ]
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+      .slice(0, 5);
+
     return NextResponse.json(
-      { total, incomes, expense, totalIncomes, totalExpenses },
+      { total, incomes, expenses, totalIncomes, totalExpenses, lastAddedItems },
       { status: 200 }
     );
   } catch (error) {

@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import useSWR from "swr";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -26,9 +26,9 @@ ChartJS.register(
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function FinancialChart() {
-  const { data: session, status } = useSession({
-    required: true,
-  });
+  // const { data: session, status } = useSession({
+  //   required: true,
+  // });
 
   const { data, error } = useSWR(
     `http://localhost:3000/api/dashboard`,
@@ -39,22 +39,54 @@ function FinancialChart() {
     datasets: [],
   });
 
+  useEffect(() => {
+    setSCharData({
+      labels: [
+        "Salary",
+        "Freelancing",
+        "Investments",
+        "Stocks",
+        "Bank transfers",
+        "other",
+      ],
+      datasets: [
+        {
+          label: "Incomes",
+          data: [118127, 22201, 19490, 17938, 24182, 17842, 22475],
+          borderColor: "rgb(53, 162, 235)",
+          backgroundColor: "rgb(53, 162, 235, 0.4",
+        },
+      ],
+    });
+    setChartOptions({
+      plugins: {
+        legend: {
+          position: "top",
+        },
+        title: {
+          display: true,
+          text: "Total income from a given source",
+        },
+      },
+      maintainAspectRatio: false,
+      responsive: true,
+    });
+  }, []);
+
   const [chartOptions, setChartOptions] = useState({});
 
-  if (status === "loading") {
-    return <p>Loading...</p>;
-  }
+  // if (status === "loading") {
+  //   return <p>Loading...</p>;
+  // }
 
-  if (status === "unauthenticated") {
-    return <p>Access Denied</p>;
-  }
+  // if (status === "unauthenticated") {
+  //   return <p>Access Denied</p>;
+  // }
 
- 
-  console.log(data)
-  
+  // console.log(data);
 
-  if (error) return <div>Failed to load</div>;
-  if (!data) return <div>Loading...</div>;
+  // if (error) return <div>Failed to load</div>;
+  // if (!data) return <div>Loading...</div>;
 
   return (
     <>

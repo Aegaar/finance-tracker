@@ -34,6 +34,8 @@ function NewIncomePage() {
       source: formData.get("source"),
     };
 
+    console.log(newIncome)
+
     const validation = createIncomeSchema.safeParse(newIncome);
 
     if (!validation.success) {
@@ -148,7 +150,7 @@ function NewIncomePage() {
                       className="flex cursor-pointer items-center justify-center rounded-md border-2 border-gray-400 bg-white px-3 py-2 text-gray-900 hover:text-blue-500 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-500 has-[:checked]:text-white"
                     >
                       <input
-                        defaultChecked
+                        // default
                         type="radio"
                         name="source"
                         value="SALARY"
