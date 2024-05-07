@@ -5,5 +5,4 @@ export const createItemSchema = z.object({
   description: z.string().min(1),
   amount: z.number().positive(),
   source: z.string().min(1).max(255),
-  // incomeDate: z.string().datetime(),
 });

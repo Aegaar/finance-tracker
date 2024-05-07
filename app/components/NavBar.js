@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { HandCoins, Menu } from "lucide-react";
-import { usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+
+//TODO NAPRAWIĆ ZACHOWANIE NAVBARA PODCZAS PRÓBY WEJSCIA NA CHRONIONĄ SCIEZKE
 
 function NavBar() {
   const { status, data: session } = useSession();
@@ -78,7 +80,7 @@ function NavBar() {
                   </span>
                 </div>
               )}
-              {(status !== "loading" && status === 'authenticated') && (
+              {status !== "loading" && status === "authenticated" && (
                 <Link href="/">
                   <Image
                     src={session.user.image}

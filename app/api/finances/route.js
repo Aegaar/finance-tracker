@@ -41,6 +41,8 @@ export async function POST(NextRequest) {
       return NextResponse.json({ message: "Invalid data" }, { status: 400 });
     }
 
+    console.log(body.source)
+
     const addItem = await tableName.create({
       data: {
         title: body.title,
