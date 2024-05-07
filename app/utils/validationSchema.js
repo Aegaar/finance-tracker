@@ -1,8 +1,24 @@
 import { z } from "zod";
 
-export const createItemSchema = z.object({
-  title: z.string().min(1).max(255),
-  description: z.string().min(1),
-  amount: z.number().positive(),
-  source: z.string().min(1).max(255),
+const { string, object, number } = z;
+
+export const createItemSchema = object({
+  title: string()
+    .min(1, { message: "Title must be at least 1 character long" })
+    .max(255, { message: "Title must not exceed 255 characters" })
+    .refine(value => value.trim().length > 0, { message: "Title must not be empty or contain only whitespace" }),
+  description: string()
+    .min(1, { message: "Description must be at least 1 character long" })
+    .refine(value => value.trim().length > 0, { message: "Description must not be empty or contain only whitespace" }),
+  amount: number({
+      errorMap: () => ({ message: "Amount must be a number" }),
+    })
+    .positive({
+      errorMap: () => ({ message: "Amount must be a positive number" }),
+    }),
+  source: string({
+      errorMap: () => ({ message: "Source must not be empty" }),
+    })
+    .min(1)
+    .max(255, { message: "Source must be between 1 and 255 characters" }),
 });

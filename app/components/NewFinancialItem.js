@@ -27,7 +27,10 @@ function NewFinancialItem({ tableName, link, sources }) {
     const validation = createItemSchema.safeParse(newItem);
 
     if (!validation.success) {
-      setError({ message: "Invalid form data" });
+      const errorMessage = validation.error.issues
+        .map((issue) => issue.message)
+        .join(", ");
+      setError({ message: errorMessage });
       return;
     }
 

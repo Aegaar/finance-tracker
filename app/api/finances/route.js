@@ -35,13 +35,14 @@ export async function POST(NextRequest) {
       );
     }
 
-    const incomeSlug = body.title + uniqueSlug();
+    const incomeSlug =
+      body.title.trim().replace(/\s/g, "-") + "-" + uniqueSlug();
 
     if (!validation.success) {
       return NextResponse.json({ message: "Invalid data" }, { status: 400 });
     }
 
-    console.log(body.source)
+    console.log(body.source);
 
     const addItem = await tableName.create({
       data: {
@@ -54,10 +55,9 @@ export async function POST(NextRequest) {
       },
     });
 
-
     return NextResponse.json(addItem, { status: 201 });
   } catch (error) {
-    console.log(error)
+    console.log(error);
 
     return NextResponse.json(
       { message: "Something went wrong" },
@@ -81,7 +81,7 @@ export async function GET(NextRequest) {
 
   let tableName;
 
-  console.log(searchParams.get("table"))
+  console.log(searchParams.get("table"));
 
   if (searchParams.get("table") === "income") {
     tableName = prisma.income;
