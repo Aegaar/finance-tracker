@@ -4,7 +4,7 @@ import prisma from "../../../prisma/client";
 import { getAuthSession } from "../../utils/auth";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../utils/auth";
-import { createIncomeSchema } from "../../utils/validationSchema";
+import { createItemSchema } from "../../utils/validationSchema";
 
 const uniqueSlug = require("unique-slug");
 
@@ -21,11 +21,11 @@ export async function POST(NextRequest) {
     let slugBase;
 
     if (body.table === "income") {
-      validation = createIncomeSchema.safeParse(body);
+      validation = createItemSchema.safeParse(body);
       tableName = prisma.income;
       slugBase = "incomes";
     } else if (body.table === "expense") {
-      validation = createExpenseSchema.safeParse(body);
+      validation = createItemSchema.safeParse(body);
       tableName = prisma.expense;
       slugBase = "expenses";
     } else {
@@ -52,8 +52,11 @@ export async function POST(NextRequest) {
       },
     });
 
+
     return NextResponse.json(addItem, { status: 201 });
   } catch (error) {
+    console.log(error)
+
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 500 }
@@ -75,6 +78,8 @@ export async function GET(NextRequest) {
   const PAGINATION_NUMBER = 2;
 
   let tableName;
+
+  console.log(searchParams.get("table"))
 
   if (searchParams.get("table") === "income") {
     tableName = prisma.income;

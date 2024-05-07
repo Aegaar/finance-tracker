@@ -271,7 +271,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { createIncomeSchema } from "../../utils/validationSchema";
+import { createItemSchema } from "../../utils/validationSchema";
 import { useState } from "react";
 // import { revalidatePath } from "next/cache";
 import Message from "../../components/Message";
@@ -305,7 +305,7 @@ function NewIncomePage() {
 
     console.log(newIncome);
 
-    const validation = createIncomeSchema.safeParse(newIncome);
+    const validation = createItemSchema.safeParse(newIncome);
 
     if (!validation.success) {
       setError({ message: "Invalid form data" });
@@ -351,7 +351,7 @@ function NewIncomePage() {
               Add your income
             </h1>
             {open && (
-              <Message text="Income added successfully" timeout={55000} props />
+              <Message text="Income" timeout={55000} link={'/incomes'} />
             )}
             <form
               method="POST"

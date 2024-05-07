@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-function Message({ timeout, text }) {
+function Message({ timeout, text, link }) {
   const [visible, setIsVisible] = useState(true);
 
   useEffect(() => {
@@ -16,8 +16,10 @@ function Message({ timeout, text }) {
 
   return visible ? (
     <div>
-      <p className="text-green-600">{text}</p>
-      <Link href="/incomes" className="font-bold target:shadow-lg">See recently added incomes </Link>
+      <p className="text-green-600">{text} added successfully</p>
+      <Link href={link} className="font-bold target:shadow-lg">
+        See recently added {text.toLowerCase()}s{" "}
+      </Link>
     </div>
   ) : null;
 }
