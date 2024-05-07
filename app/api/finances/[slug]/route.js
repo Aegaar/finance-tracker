@@ -33,7 +33,6 @@ export async function GET(NextRequest, { params }) {
 
     return NextResponse.json(item, { status: 200 });
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 500 }
@@ -48,8 +47,6 @@ export async function DELETE(NextRequest, { params }) {
   }
 
   const { searchParams } = new URL(NextRequest.url);
-
-  console.log(searchParams.get("table"));
 
   let tableName;
 

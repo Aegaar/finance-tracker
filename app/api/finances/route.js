@@ -42,8 +42,6 @@ export async function POST(NextRequest) {
       return NextResponse.json({ message: "Invalid data" }, { status: 400 });
     }
 
-    console.log(body.source);
-
     const addItem = await tableName.create({
       data: {
         title: body.title,
@@ -57,8 +55,6 @@ export async function POST(NextRequest) {
 
     return NextResponse.json(addItem, { status: 201 });
   } catch (error) {
-    console.log(error);
-
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 500 }
@@ -80,8 +76,6 @@ export async function GET(NextRequest) {
   const PAGINATION_NUMBER = 2;
 
   let tableName;
-
-  console.log(searchParams.get("table"));
 
   if (searchParams.get("table") === "income") {
     tableName = prisma.income;
@@ -113,7 +107,6 @@ export async function GET(NextRequest) {
 
     return NextResponse.json({ items, count }, { status: 200 });
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 500 }

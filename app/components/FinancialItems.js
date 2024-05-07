@@ -34,12 +34,18 @@ function FinancialItems({ page, tableName, link }) {
           </span>
         </Link>
       </button>
-      {items.map((item) => (
-        <Link key={item.id} href={`${link}/${item.slug}`}>
-          {item.title}
-        </Link>
-      ))}
-      <Pagination page={page} hasPrev={hasPrev} hasNext={hasNext} />
+      {items.length <= 0 ? (
+        <div>No {tableName} at present, add it</div>
+      ) : (
+        <>
+          {items.map((item) => (
+            <Link key={item.id} href={`${link}/${item.slug}`}>
+              {item.title}
+            </Link>
+          ))}
+          <Pagination page={page} hasPrev={hasPrev} hasNext={hasNext} />
+        </>
+      )}
     </>
   );
 }
