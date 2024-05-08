@@ -47,14 +47,14 @@ function FinancialItems({ page, tableName, link }) {
                 key={item.id}
                 className="p-6 bg-blue-500 border border-gray-200 rounded-2xl  flex flex-col "
               >
-                <h1 className="mb-2 text-2xl font-bold tracking-tight text-white ">
+                <h1 className="mb-6 text-2xl font-bold tracking-tight text-white ">
                   {item.title}
                 </h1>
-                <p className="mb-3 font-normal text-white ">
+                <p className="mb-6 font-normal text-white ">
                   <span className="text-black font-bold">Amount: </span>
                   {item.amount}
                 </p>
-                <p className="mb-3 font-normal text-white">
+                <p className="mb-6 font-normal text-white ">
                   <span className="text-black font-bold">Source: </span>
                   {item.source.toLowerCase()}
                 </p>
@@ -72,7 +72,7 @@ function FinancialItems({ page, tableName, link }) {
               </div>
             ))}
           </div>
-          {items.length >= PAGINATION_NUMBER && (
+          {(hasNext || hasPrev) && (
             <Pagination page={page} hasPrev={hasPrev} hasNext={hasNext} />
           )}
         </>

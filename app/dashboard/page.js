@@ -20,7 +20,7 @@ function DashboardPage() {
   );
 
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return <Loading/>;
   }
 
   if (status === "unauthenticated") {
@@ -29,11 +29,11 @@ function DashboardPage() {
 
   if (isLoading) return <Loading />;
   if (error) return <div>Failed to load</div>;
-  if (!data) return <div>Loading...</div>;
+  if (!data) return <div>No data</div>;
 
   return (
-    <div className="flex mx-10 ">
-      <div className="w-4/6 flex flex-col mr-10">
+    <div className="flex flex-col lg:flex-row mx-10">
+      <div className=" lg:w-4/6 lg:mr-10 flex flex-col ">
         {data.incomes.length > 0 ? (
           <FinancialChart
             items={data.incomes}
@@ -54,7 +54,7 @@ function DashboardPage() {
         )}
       </div>
 
-      <div className="w-2/6">
+      <div className=" lg:w-2/6 mt-5 lg:mt-0">
         <Totals
           numberOfIncomesAndExpenses={data.numberOfIncomesAndExpenses}
           numberOfExpenses={data.numberOfExpenses}

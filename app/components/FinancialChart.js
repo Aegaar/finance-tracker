@@ -41,14 +41,18 @@ function FinancialChart({ items, title, text }) {
         amount,
       })
     );
+
+    const borderColor = title === "incomes" ? "#95ed9a" : "#eb7171";
+    const backgroundColor = title === "incomes" ? "#95ed9a" : "#eb7171";
+
     setCharData({
       labels: chartDataArray.map((data) => data.source),
       datasets: [
         {
           label: title,
           data: chartDataArray.map((data) => data.amount),
-          borderColor: "rgb(53, 162, 235)",
-          backgroundColor: "rgb(53, 162, 235, 0.4)",
+          borderColor: borderColor,
+          backgroundColor: backgroundColor,
         },
       ],
     });

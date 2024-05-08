@@ -4,14 +4,14 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import Image from "next/image";
-
+import Loading from "../loading";
 
 function page() {
   const { status } = useSession();
   const router = useRouter();
 
   if (status === "loading") {
-    return <div>loading...</div>;
+    return <Loading />;
   }
 
   if (status === "authenticated") {
@@ -22,9 +22,13 @@ function page() {
     <div className="min-h-screen text-black flex justify-center">
       <div className="max-w-screen-xl m-0 sm:m-10 bg-white flex flex-col lg:flex-row justify-center align-middle">
         <div className="lg:w-1/2 xl:w-5/12 px-6 sm:p-12 flex flex-col items-center justify-center  ">
-          <h1 className="text-2xl xl:text-3xl text-center font-bold pb-10 lx:px-5">Login to control your budget with ease</h1>
+          <h1 className="text-2xl xl:text-3xl text-center font-bold pb-10 lx:px-5">
+            Login to control your budget with ease
+          </h1>
           <div className="flex flex-col items-center  ">
-            <h2 className="text-xl xl:text-2xl text-center">Select login options </h2>
+            <h2 className="text-xl xl:text-2xl text-center">
+              Select login options{" "}
+            </h2>
             <div className="w-full flex-1 mt-8  ">
               <div className="flex flex-col items-center ">
                 <button

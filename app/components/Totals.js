@@ -17,13 +17,13 @@ function Totals({
       name: "income",
       total: totalIncomes,
       number: numberOfIncomes,
-      icon: <MoveUpRight color="#000000" size={30} className="mr-2" />,
+      icon: <MoveUpRight color="#15803d" size={30} className="mr-2" />,
     },
     {
       name: "expense",
       total: totalExpenses,
       number: numberOfExpenses,
-      icon: <MoveDownRight color="#000000" size={30} className="mr-2" />,
+      icon: <MoveDownRight color="#ef4444" size={30} className="mr-2" />,
     },
     {
       name: "total",

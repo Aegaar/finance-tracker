@@ -69,7 +69,7 @@ function NewFinancialItem({ tableName, link, sources }) {
       <div className="container mx-auto">
         <main className="px-8 py-8 sm:px-12 lg:px-0 lg:py-0 lg:w-full xl:px-0 xl:max-w-full text-center">
           <div className="max-w-xl lg:max-w-3xl mx-auto">
-            <h1 className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
+            <h1 className="mt-6 text-2xl font-bold text-blue-500 sm:text-3xl md:text-4xl">
               Add your {tableName}
             </h1>
             {open && <Message text={tableName} timeout={55000} link={link} />}
@@ -153,7 +153,7 @@ function NewFinancialItem({ tableName, link, sources }) {
                 </fieldset>
               </div>
               <div className="flex justify-center col-span-6 sm:flex sm:items-center sm:gap-4">
-                <button className="inline-block shrink-0 rounded-md border w-full border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500">
+                <button className="inline-block shrink-0 rounded-md border w-full border-blue-500 bg-blue-500 px-12 py-3 text-sm font-medium text-white transition hover:bg-blue-600   ">
                   Add
                 </button>
               </div>

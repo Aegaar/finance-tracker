@@ -54,6 +54,10 @@ function FinancialItem({ slug, tableName, link }) {
       detail: data.amount,
       description: "Amount",
     },
+    {
+      detail: data.source,
+      description: "Source",
+    },
     { detail: data.description, description: "Description" },
     { detail: data.createdAt, description: "Created at" },
     { detail: data.userEmail, description: "Creator email" },

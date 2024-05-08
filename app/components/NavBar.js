@@ -27,6 +27,8 @@ function NavBar() {
     });
   }
 
+ if(status !== "unauthenticated") return <p>unauthenticated</p>
+
   return (
     <>
       <header className="bg-white overflow-hidden py-2">
@@ -131,3 +133,129 @@ function NavBar() {
 }
 
 export default NavBar;
+
+// 'use client'
+
+// import { useState } from "react";
+// import { signOut, useSession } from "next-auth/react";
+// import { usePathname } from "next/navigation";
+// import Link from "next/link";
+// import Image from "next/image";
+// import { HandCoins, Menu } from "lucide-react";
+
+// function NavBar() {
+//   const { status, data: session } = useSession();
+//   const [menuOpen, setMenuOpen] = useState(false);
+//   const toggleMenu = () => setMenuOpen(prevState => !prevState);
+//   const closeMenu = () => setMenuOpen(false);
+//   const path = usePathname();
+  
+//   const links = [
+//     { name: "Incomes", href: "/incomes" },
+//     { name: "Expenses", href: "/expenses" },
+//     { name: "Dashboard", href: "/dashboard" },
+//   ];
+
+//   const handleSignOut = () => {
+//     signOut({ callbackUrl: "/" });
+//   };
+
+//   return (
+//     <header className="bg-white overflow-hidden py-2">
+//       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+//         <div className="flex h-16 items-center justify-between">
+//           <div className="md:flex md:items-center md:gap-12">
+//             <Link href="/">
+//               <HandCoins className="text-blue-500" size={44} />
+//             </Link>
+//           </div>
+//           <div className="hidden md:block">
+//             {status !== "unauthenticated" && (
+//               <nav aria-label="Global">
+//                 <ul className="flex items-center gap-6">
+//                   {links.map(link => (
+//                     <li key={link.href}>
+//                       <Link
+//                         href={link.href}
+//                         className={`text-zinc-500 hover:text-zinc-800 transition-colors font-bold ${
+//                           link.href === path ? "text-blue-500" : "text-zinc-400"
+//                         }`}
+//                       >
+//                         {link.name}
+//                       </Link>
+//                     </li>
+//                   ))}
+//                 </ul>
+//               </nav>
+//             )}
+//           </div>
+//           <div className="flex items-center gap-4">
+//             {status === "unauthenticated" ? (
+//               <div className="sm:flex sm:gap-4">
+//                 <Link
+//                   className="rounded-md bg-blue-500 px-5 py-2.5 text-sm font-medium text-white shadow hover:bg-blue-600 transition-colors"
+//                   href="/login"
+//                 >
+//                   Login
+//                 </Link>
+//               </div>
+//             ) : (
+//               <div className="sm:flex sm:gap-4">
+//                 <button
+//                   className="rounded-md bg-blue-500 px-5 py-2.5 text-sm font-medium text-white shadow hover:bg-blue-600 transition-colors"
+//                   onClick={handleSignOut}
+//                 >
+//                   Logout
+//                 </button>
+//               </div>
+//             )}
+//             {status !== "loading" && status === "authenticated" && (
+//               <Link href="/">
+//                 <Image
+//                   src={session.user.image}
+//                   width={35}
+//                   height={35}
+//                   alt="user image"
+//                   style={{
+//                     objectFit: "cover",
+//                     borderRadius: "100px",
+//                   }}
+//                 />
+//               </Link>
+//             )}
+//             <div className="block md:hidden">
+//               {status !== "unauthenticated" && (
+//                 <button
+//                   className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
+//                   onClick={toggleMenu}
+//                 >
+//                   <Menu />
+//                 </button>
+//               )}
+
+//               {menuOpen && status !== "unauthenticated" && (
+//                 <div className="flex justify-center items-center fixed top-0 left-0 w-full h-full bg-white z-50">
+//                   <ul className="flex flex-col w-full">
+//                     {links.map(link => (
+//                       <li key={link.href} className="my-4">
+//                         <Link
+//                           onClick={closeMenu}
+//                           href={link.href}
+//                           className="block px-4 py-2 text-zinc-500 hover:text-blue-500 transition-colors text-center"
+//                         >
+//                           {link.name}
+//                         </Link>
+//                       </li>
+//                     ))}
+//                   </ul>
+//                 </div>
+//               )}
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </header>
+//   );
+// }
+
+// export default NavBar;
