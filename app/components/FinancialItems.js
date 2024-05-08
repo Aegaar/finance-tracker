@@ -36,7 +36,9 @@ function FinancialItems({ page, tableName, link }) {
         </button>
       </div>
       {items.length <= 0 ? (
-        <div>No {tableName} at present, add it</div>
+        <div className="text-center text-2xl">
+          No {tableName} at present, add it
+        </div>
       ) : (
         <>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4 px-10">
@@ -70,7 +72,9 @@ function FinancialItems({ page, tableName, link }) {
               </div>
             ))}
           </div>
-          <Pagination page={page} hasPrev={hasPrev} hasNext={hasNext} />
+          {items.length >= PAGINATION_NUMBER && (
+            <Pagination page={page} hasPrev={hasPrev} hasNext={hasNext} />
+          )}
         </>
       )}
     </>

@@ -61,7 +61,13 @@ export async function GET() {
     const totalIncomes = sumIncomes?._sum.amount || 0;
     const totalExpenses = sumExpenses?._sum.amount || 0;
 
+    const numberOfIncomes = incomes.length;
+    const numberOfExpenses = expenses.length;
+    const numberOfIncomesAndExpenses = numberOfIncomes + numberOfExpenses
+
     const total = totalIncomes - totalExpenses;
+
+    // console.log(total)
 
     const lastAddedItems = [
       ...incomes.map((item) => ({ ...item, type: "income" })),
@@ -71,7 +77,17 @@ export async function GET() {
       .slice(0, 5);
 
     return NextResponse.json(
-      { total, incomes, expenses, totalIncomes, totalExpenses, lastAddedItems },
+      {
+        total,
+        incomes,
+        expenses,
+        totalIncomes,
+        totalExpenses,
+        lastAddedItems,
+        numberOfIncomes,
+        numberOfExpenses,
+        numberOfIncomesAndExpenses
+      },
       { status: 200 }
     );
   } catch (error) {
