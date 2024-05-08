@@ -4,6 +4,7 @@ import Link from "next/link";
 import Pagination from "../components/Pagination";
 import useSWR from "swr";
 import { MoveRight } from "lucide-react";
+import Loading from "../loading";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -12,6 +13,8 @@ function FinancialItems({ page, tableName, link }) {
     `http://localhost:3000/api/finances?page=${page}&table=${tableName}`,
     fetcher
   );
+
+  if (isLoading) return <Loading />;
 
   if (error) {
     return <div>Failed to load data</div>;
@@ -32,7 +35,7 @@ function FinancialItems({ page, tableName, link }) {
           </Link>
         </button>
       </div>
-      {!data && !isLoading ? (
+      {items.length <= 0 ? (
         <div>No {tableName} at present, add it</div>
       ) : (
         <>
@@ -42,9 +45,9 @@ function FinancialItems({ page, tableName, link }) {
                 key={item.id}
                 className="p-6 bg-blue-500 border border-gray-200 rounded-2xl  flex flex-col "
               >
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-white ">
+                <h1 className="mb-2 text-2xl font-bold tracking-tight text-white ">
                   {item.title}
-                </h5>
+                </h1>
                 <p className="mb-3 font-normal text-white ">
                   <span className="text-black font-bold">Amount: </span>
                   {item.amount}

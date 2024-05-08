@@ -3,6 +3,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../utils/auth";
 import { redirect } from "next/navigation";
 import FinancialItems from "../components/FinancialItems";
+import { Suspense } from "react";
+import Loading from "../loading";
 
 async function ExpensesPage({ searchParams }) {
   const session = await getServerSession(authOptions);
@@ -15,7 +17,9 @@ async function ExpensesPage({ searchParams }) {
 
   return (
     <>
-      <FinancialItems page={page} tableName={"expense"} link={"/expenses"} />
+      <Suspense fallback={<Loading />}>
+        <FinancialItems page={page} tableName={"expense"} link={"/expenses"} />
+      </Suspense>
     </>
   );
 }
