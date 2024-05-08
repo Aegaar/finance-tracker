@@ -32,7 +32,7 @@ function DashboardPage() {
   if (!data) return <div>Loading...</div>;
 
   return (
-    <div className="flex mx-10">
+    <div className="flex mx-10 ">
       <div className="w-4/6 flex flex-col mr-10">
         {data.incomes.length > 0 ? (
           <FinancialChart
@@ -56,7 +56,7 @@ function DashboardPage() {
 
       <div className="w-2/6">
         <Totals
-        numberOfIncomesAndExpenses={data.numberOfIncomesAndExpenses}
+          numberOfIncomesAndExpenses={data.numberOfIncomesAndExpenses}
           numberOfExpenses={data.numberOfExpenses}
           numberOfIncomes={data.numberOfIncomes}
           total={data.total}

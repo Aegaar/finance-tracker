@@ -18,6 +18,7 @@ export async function GET() {
             amount: true,
             source: true,
             createdAt: true,
+            title: true
           },
           where: {
             userEmail: session.user.email,
@@ -32,6 +33,7 @@ export async function GET() {
             amount: true,
             source: true,
             createdAt: true,
+            title: true
           },
           where: {
             userEmail: session.user.email,
@@ -66,8 +68,6 @@ export async function GET() {
     const numberOfIncomesAndExpenses = numberOfIncomes + numberOfExpenses
 
     const total = totalIncomes - totalExpenses;
-
-    // console.log(total)
 
     const lastAddedItems = [
       ...incomes.map((item) => ({ ...item, type: "income" })),

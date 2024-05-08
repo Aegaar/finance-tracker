@@ -29,7 +29,7 @@ function NavBar() {
 
   return (
     <>
-      <header className="bg-white overflow-hidden">
+      <header className="bg-white overflow-hidden py-2">
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="md:flex md:items-center md:gap-12">
@@ -40,7 +40,7 @@ function NavBar() {
             <div className="hidden md:block">
               {status !== "unauthenticated" && (
                 <nav aria-label="Global">
-                  <ul className="flex items-center gap-6 text-sm">
+                  <ul className="flex items-center gap-6 ">
                     {links.map((link) => (
                       <li key={link.href}>
                         <Link
