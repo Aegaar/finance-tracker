@@ -63,7 +63,7 @@ function NavBar() {
               {status === "unauthenticated" ? (
                 <div className="sm:flex sm:gap-4">
                   <Link
-                    className="rounded-md bg-blue-500 px-5 py-2.5 text-sm font-medium text-white shadow"
+                    className="rounded-md bg-blue-500 px-5 py-2.5 text-sm font-medium text-white shadow hover:bg-blue-600 transition-colors"
                     href="/login"
                   >
                     Login
@@ -72,7 +72,7 @@ function NavBar() {
               ) : (
                 <div className="sm:flex sm:gap-4">
                   <span
-                    className="rounded-md bg-blue-500 px-5 py-2.5 text-sm font-medium text-white shadow"
+                    className="rounded-md bg-blue-500 px-5 py-2.5 text-sm font-medium text-white shadow hover:bg-blue-600 transition-colors"
                     href="/"
                     onClick={handleSignOut}
                   >

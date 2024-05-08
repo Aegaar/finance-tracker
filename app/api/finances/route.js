@@ -73,7 +73,7 @@ export async function GET(NextRequest) {
 
   const page = searchParams.get("page");
 
-  const PAGINATION_NUMBER = 2;
+  const PAGINATION_NUMBER = 9;
 
   let tableName;
 

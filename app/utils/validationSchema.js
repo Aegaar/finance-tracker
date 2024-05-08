@@ -15,7 +15,7 @@ export const createItemSchema = object({
     })
     .positive({
       errorMap: () => ({ message: "Amount must be a positive number" }),
-    }),
+    }).lte(999999999, { message: "Amount must be max 10 digits long" }),
   source: string({
       errorMap: () => ({ message: "Source must not be empty" }),
     })
