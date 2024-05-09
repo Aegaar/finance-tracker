@@ -6,6 +6,19 @@ import FinancialItem from "../../components/FinancialItem";
 import { Suspense } from "react";
 import Loading from "../../loading";
 
+export async function generateMetadata({ params }) {
+  const slug = params.expenseSlug;
+
+  const parts = slug.split("-");
+  const firstTwoParts = parts.slice(0, 2);
+  const id = firstTwoParts.join("-");
+
+  return {
+    title: id,
+    description: 'See details of expense'
+  };
+}
+
 async function ExpensePage({ params }) {
   const session = await getServerSession(authOptions);
 
@@ -16,7 +29,7 @@ async function ExpensePage({ params }) {
   const slug = params.expenseSlug;
 
   return (
-    <Suspense>
+    <Suspense fallback={<Loading />}>
       <FinancialItem slug={slug} tableName={"expense"} link={"/expenses"} />
     </Suspense>
   );

@@ -2,9 +2,10 @@
 
 import React from "react";
 import useSWR, { mutate } from "swr";
-import { useRouter } from "next/navigation";
+import { useRouter, notFound } from "next/navigation";
 import Loading from "../loading";
 import { Trash2 } from "lucide-react";
+import Button from "./Button";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -31,17 +32,17 @@ function FinancialItem({ slug, tableName, link }) {
       if (!res.ok) {
         throw new Error(`Failed to delete ${tableName}`);
       }
-
-      mutate(link);
-      router.push(link);
     } catch (error) {
       console.error("Delete error:", error);
     }
+
+    mutate(link);
+    router.push(link);
   };
 
   if (isLoading) return <Loading />;
   if (error) return <div>Failed to load</div>;
-  if (!data) return <div>No data</div>;
+  if (!data) return notFound();
 
   let itemName = tableName.charAt(0).toUpperCase() + tableName.slice(1);
 
@@ -76,25 +77,23 @@ function FinancialItem({ slug, tableName, link }) {
                 key={`${tableName}-${item_detail.description}`}
                 className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4"
               >
-                <dt className="text-black font-bold ">
-                  {item_detail.description}
+                <dt className="text-white font-bold ">
+                  {item_detail.description}:
                 </dt>
-                <dd className=" text-white sm:col-span-2">
+                <dd className=" text-white sm:col-span-2 italic">
                   {item_detail.detail}
                 </dd>
               </div>
             ))}
           </dl>
         </div>
-
         <div className="flex justify-center">
-          <button
+          <Button
+            icon={<Trash2 />}
+            description={`Delete ${tableName}`}
             onClick={deleteHandler}
-            className="w-1/2 md:w-1/3 lx:w-1/4 inline-flex items-center justify-center px-3 mx-3 py-2 mt-10 text-sm font-medium text-center text-black bg-white hover:text-blue-500 transition-colors rounded-lg hover: focus:ring-4 focus:outline-none align-center "
-          >
-            <p className="mr-3 text-center">Delete {tableName}</p>
-            <Trash2 />
-          </button>
+            style={" rounded-2xl bg-white px-8 py-3 text-blue-500 mt-8"}
+          />
         </div>
       </div>
     </div>

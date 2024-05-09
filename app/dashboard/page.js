@@ -6,6 +6,9 @@ import RecentFinancialItems from "../components/RecentFinancialItems";
 import Totals from "../components/Totals";
 import useSWR from "swr";
 import Loading from "../loading";
+import { BarChart3 } from "lucide-react";
+import { CirclePlus } from "lucide-react";
+import Button from "../components/Button";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -20,7 +23,7 @@ function DashboardPage() {
   );
 
   if (status === "loading") {
-    return <Loading/>;
+    return <Loading />;
   }
 
   if (status === "unauthenticated") {
@@ -41,7 +44,22 @@ function DashboardPage() {
             text="Total income from a given source"
           />
         ) : (
-          <p>You need to add incomes to see the graph</p>
+          <div className=" mt-10 mb-10">
+            <div className="flex align-center justify-center">
+              <BarChart3 size={30} />
+              <p className="text-center font-bold text-blue-500 pl-4 text-xl">
+                You need to add incomes to see the graph
+              </p>
+            </div>
+            <div className="flex justify-center pt-10">
+              <Button
+                href={"/incomes/new"}
+                description={"Add new income"}
+                icon={<CirclePlus />}
+                style={"bg-blue-500 text-white rounded-2xl px-8 py-3"}
+              />
+            </div>
+          </div>
         )}
         {data.expenses.length > 0 ? (
           <FinancialChart
@@ -50,7 +68,22 @@ function DashboardPage() {
             text="Total expense from a given source"
           />
         ) : (
-          <p>You need to add expenses to see the graph</p>
+          <div className=" mt-10 mb-10">
+            <div className="flex align-center justify-center">
+              <BarChart3 size={30} />
+              <p className="text-center font-bold text-blue-500 pl-4 text-xl">
+                You need to add expenses to see the graph
+              </p>
+            </div>
+            <div className="flex justify-center pt-10">
+              <Button
+                href={"/expenses/new"}
+                description={"Add new expense"}
+                icon={<CirclePlus />}
+                style={"bg-blue-500 text-white rounded-2xl px-8 py-3"}
+              />
+            </div>
+          </div>
         )}
       </div>
 

@@ -1,6 +1,11 @@
 import Image from "next/image";
 import { Database, BarChart } from "lucide-react";
 
+export const metadata = {
+  title: "Home",
+  description: "See the possibilities of the finance tracker app",
+};
+
 export default function Home() {
   return (
     <>

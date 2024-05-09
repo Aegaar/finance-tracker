@@ -18,7 +18,7 @@ export async function GET() {
             amount: true,
             source: true,
             createdAt: true,
-            title: true
+            title: true,
           },
           where: {
             userEmail: session.user.email,
@@ -33,7 +33,7 @@ export async function GET() {
             amount: true,
             source: true,
             createdAt: true,
-            title: true
+            title: true,
           },
           where: {
             userEmail: session.user.email,
@@ -65,7 +65,7 @@ export async function GET() {
 
     const numberOfIncomes = incomes.length;
     const numberOfExpenses = expenses.length;
-    const numberOfIncomesAndExpenses = numberOfIncomes + numberOfExpenses
+    const numberOfIncomesAndExpenses = numberOfIncomes + numberOfExpenses;
 
     const total = totalIncomes - totalExpenses;
 
@@ -86,7 +86,7 @@ export async function GET() {
         lastAddedItems,
         numberOfIncomes,
         numberOfExpenses,
-        numberOfIncomesAndExpenses
+        numberOfIncomesAndExpenses,
       },
       { status: 200 }
     );

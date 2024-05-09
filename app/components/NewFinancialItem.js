@@ -2,15 +2,13 @@
 
 import React from "react";
 import { createItemSchema } from "../utils/validationSchema";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Message from "./Message";
+import { mutate } from "swr";
 
 function NewFinancialItem({ tableName, link, sources }) {
   const [error, setError] = useState({ message: undefined });
   const [open, setOpen] = useState(false);
-
-  const router = useRouter();
 
   async function submitHandler(event) {
     event.preventDefault();
@@ -58,7 +56,7 @@ function NewFinancialItem({ tableName, link, sources }) {
         setOpen(false);
       }, 5000);
 
-      router.refresh(link);
+      mutate(link);
     } catch (error) {
       setOpen(false);
       setError({ message: error.message || "Something went wrong" });

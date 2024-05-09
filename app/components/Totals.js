@@ -1,8 +1,10 @@
 import React from "react";
-import { MoveUpRight } from "lucide-react";
-import { MoveDownRight } from "lucide-react";
-import { Activity } from "lucide-react";
-import { ListOrdered } from "lucide-react";
+import {
+  MoveUpRight,
+  MoveDownRight,
+  Activity,
+  ListOrdered,
+} from "lucide-react";
 
 function Totals({
   total,

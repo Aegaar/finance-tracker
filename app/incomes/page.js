@@ -6,6 +6,11 @@ import FinancialItems from "../components/FinancialItems";
 import { Suspense } from "react";
 import Loading from "../loading";
 
+export const metadata = {
+  title: "Incomes",
+  description: "See your incomes",
+};
+
 async function IncomesPage({ searchParams }) {
   const session = await getServerSession(authOptions);
 

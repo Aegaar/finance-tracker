@@ -4,6 +4,11 @@ import { authOptions } from "../../utils/auth";
 import { redirect } from "next/navigation";
 import NewFinancialItem from "../../components/NewFinancialItem";
 
+export const metadata = {
+  title: "New expense",
+  description: "Add new expense",
+};
+
 const SOURCE_OPTIONS = [
   {
     id: "education",

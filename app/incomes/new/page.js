@@ -4,6 +4,12 @@ import { authOptions } from "../../utils/auth";
 import { redirect } from "next/navigation";
 import NewFinancialItem from "../../components/NewFinancialItem";
 
+
+export const metadata = {
+  title: "New income",
+  description: "Add new income",
+};
+
 const SOURCE_OPTIONS = [
   {
     id: "salary",
