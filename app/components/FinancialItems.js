@@ -2,9 +2,10 @@
 
 import Pagination from "../components/Pagination";
 import useSWR from "swr";
-import { MoveRight, CirclePlus } from "lucide-react";
+import { CirclePlus } from "lucide-react";
 import Loading from "../loading";
 import Button from "./Button";
+import Item from "./Item";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -39,41 +40,30 @@ function FinancialItems({ page, tableName, link }) {
       {items.length <= 0 ? (
         <div className="text-center text-2xl">No {tableName} at present</div>
       ) : (
-        <div
-          className={`grid lg:grid-cols-${
-            items.length <= 2 ? 2 : 3
-          } md:grid-cols-1 gap-6 px-10`}
-        >
-          {items.map((item) => (
-            <div
-              key={item.id}
-              className="p-4 bg-blue-500 border border-gray-200 rounded-2xl  flex flex-col "
-            >
-              <h1 className="mb-6 text-2xl font-bold tracking-tight text-white text-center italic">
-                {item.title}
-              </h1>
-              <hr />
-              <div className="mb-6 mt-6 mx-5 font-normal text-white flex justify-between ">
-                <span className="font-bold text-xl">Amount: </span>
-                <span className="text-2xl italic">{item.amount}</span>
-              </div>
-
-              <div className="mb-6  mx-5 font-normal text-white flex justify-between ">
-                <span className=" font-bold text-xl">Source: </span>
-                <span className="text-2xl italic">
-                  {item.source.toLowerCase()}
-                </span>
-              </div>
-              <div className="flex justify-center">
-                <Button
-                  href={`${link}/${item.slug}`}
-                  description={`Show details and manage ${tableName}`}
-                  icon={<MoveRight />}
-                  style={" rounded-2xl bg-white px-8 py-3 text-blue-500"}
+        <div>
+          {items.length <= 2 ? (
+            <div className={`grid lg:grid-cols-2 md:grid-cols-1 gap-6 px-10`}>
+              {items.map((item) => (
+                <Item
+                  item={item}
+                  link={link}
+                  tableName={tableName}
+                  key={item.id}
                 />
-              </div>
+              ))}
             </div>
-          ))}
+          ) : (
+            <div className={`grid lg:grid-cols-3 md:grid-cols-1 gap-6 px-10`}>
+              {items.map((item) => (
+                <Item
+                  item={item}
+                  link={link}
+                  tableName={tableName}
+                  key={item.id}
+                />
+              ))}
+            </div>
+          )}
         </div>
       )}
       {(hasNext || hasPrev) && (
