@@ -76,22 +76,7 @@ export async function GET() {
       .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
       .slice(0, 5);
 
-    // return NextResponse.json(
-    //   {
-    //     total,
-    //     incomes,
-    //     expenses,
-    //     totalIncomes,
-    //     totalExpenses,
-    //     lastAddedItems,
-    //     numberOfIncomes,
-    //     numberOfExpenses,
-    //     numberOfIncomesAndExpenses,
-    //   },
-    //   { status: 200 }
-    // );
-
-    const response = NextResponse.json(
+    return NextResponse.json(
       {
         total,
         incomes,
@@ -105,11 +90,6 @@ export async function GET() {
       },
       { status: 200 }
     );
-
-    response.headers.set("Access-Control-Allow-Origin", "*");
-
-    return response;
-
   } catch (error) {
     return NextResponse.json(
       { message: "Something went wrong" },

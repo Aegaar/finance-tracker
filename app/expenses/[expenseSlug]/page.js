@@ -15,7 +15,7 @@ export async function generateMetadata({ params }) {
 
   return {
     title: id,
-    description: 'See details of expense'
+    description: "See details of expense",
   };
 }
 

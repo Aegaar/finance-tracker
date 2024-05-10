@@ -37,7 +37,7 @@ function NewFinancialItem({ tableName, link, sources }) {
     }
 
     try {
-      const response = await fetch("api/finances", {
+      const response = await fetch("/api/finances", {
         method: "POST",
         body: JSON.stringify(newItem),
         headers: {

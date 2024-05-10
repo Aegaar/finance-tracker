@@ -19,15 +19,12 @@ function FinancialItem({ slug, tableName, link }) {
 
   const deleteHandler = async () => {
     try {
-      const res = await fetch(
-        `api/finances/${slug}?table=${tableName}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await fetch(`api/finances/${slug}?table=${tableName}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (!res.ok) {
         throw new Error(`Failed to delete ${tableName}`);

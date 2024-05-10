@@ -12,7 +12,7 @@ export async function generateMetadata({ params }) {
   const parts = slug.split("-");
   const firstTwoParts = parts.slice(0, 2);
   const id = firstTwoParts.join("-");
-  
+
   return {
     title: id,
     description: "See details of income",

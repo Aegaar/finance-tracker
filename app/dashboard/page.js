@@ -17,10 +17,7 @@ function DashboardPage() {
     required: true,
   });
 
-  const { data, error, isLoading } = useSWR(
-    `api/dashboard`,
-    fetcher
-  );
+  const { data, error, isLoading } = useSWR(`api/dashboard`, fetcher);
 
   if (status === "loading") {
     return <Loading />;
