@@ -18,7 +18,7 @@ function DashboardPage() {
   });
 
   const { data, error, isLoading } = useSWR(
-    `http://localhost:3000/api/dashboard`,
+    `api/dashboard`,
     fetcher
   );
 

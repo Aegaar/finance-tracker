@@ -11,7 +11,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function FinancialItems({ page, tableName, link }) {
   const { data, error, isLoading } = useSWR(
-    `http://localhost:3000/api/finances?page=${page}&table=${tableName}`,
+    `api/finances?page=${page}&table=${tableName}`,
     fetcher
   );
 

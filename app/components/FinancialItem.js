@@ -13,14 +13,14 @@ function FinancialItem({ slug, tableName, link }) {
   const router = useRouter();
 
   const { data, error, isLoading } = useSWR(
-    `http://localhost:3000/api/finances/${slug}?table=${tableName}`,
+    `api/finances/${slug}?table=${tableName}`,
     fetcher
   );
 
   const deleteHandler = async () => {
     try {
       const res = await fetch(
-        `http://localhost:3000/api/finances/${slug}?table=${tableName}`,
+        `api/finances/${slug}?table=${tableName}`,
         {
           method: "DELETE",
           headers: {
