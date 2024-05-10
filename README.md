@@ -36,7 +36,7 @@ Features:
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=supabase,vercel" />
   </a>
-  <p  align="center">| SUPABASE | VERCEL |</p>![zad53mm](https://github.com/Aegaar/finance-tracker/assets/117531984/052cc16b-8502-41c9-a52d-8a97d22a5e27)
+  <p  align="center">| SUPABASE | VERCEL |</p>
 
 </p>
 
