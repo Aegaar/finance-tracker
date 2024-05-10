@@ -6,6 +6,7 @@ import { CirclePlus } from "lucide-react";
 import Loading from "../loading";
 import Button from "./Button";
 import Item from "./Item";
+import ErrorComponent from "../error";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -16,10 +17,7 @@ function FinancialItems({ page, tableName, link }) {
   );
 
   if (isLoading) return <Loading />;
-
-  if (error) {
-    return <div>Failed to load data</div>;
-  }
+  if (error) return <ErrorComponent />;
 
   const items = data?.items || [];
   const PAGINATION_NUMBER = 6;

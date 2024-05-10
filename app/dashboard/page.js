@@ -9,6 +9,7 @@ import Loading from "../loading";
 import { BarChart3 } from "lucide-react";
 import { CirclePlus } from "lucide-react";
 import Button from "../components/Button";
+import Error from "../error";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -28,8 +29,11 @@ function DashboardPage() {
   }
 
   if (isLoading) return <Loading />;
-  if (error) return <div>Failed to load</div>;
-  if (!data) return <div>No data</div>;
+  if (error) return <Error />;
+  if (!data)
+    return (
+      <div className="flex items-center justify-center mt-10">No data</div>
+    );
 
   return (
     <div className="flex flex-col lg:flex-row mx-10">

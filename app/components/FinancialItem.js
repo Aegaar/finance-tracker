@@ -6,6 +6,7 @@ import { useRouter, notFound } from "next/navigation";
 import Loading from "../loading";
 import { Trash2 } from "lucide-react";
 import Button from "./Button";
+import ErrorComponent from "../error";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -13,13 +14,13 @@ function FinancialItem({ slug, tableName, link }) {
   const router = useRouter();
 
   const { data, error, isLoading } = useSWR(
-    `api/finances/${slug}?table=${tableName}`,
+    `/api/finances/${slug}?table=${tableName}`,
     fetcher
   );
 
   const deleteHandler = async () => {
     try {
-      const res = await fetch(`api/finances/${slug}?table=${tableName}`, {
+      const res = await fetch(`/api/finances/${slug}?table=${tableName}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -29,16 +30,16 @@ function FinancialItem({ slug, tableName, link }) {
       if (!res.ok) {
         throw new Error(`Failed to delete ${tableName}`);
       }
-    } catch (error) {
-      console.error("Delete error:", error);
-    }
 
-    mutate(link);
-    router.push(link);
+      mutate(link);
+      router.push(link);
+    } catch (error) {
+      throw new Error("Delete error:", error);
+    }
   };
 
   if (isLoading) return <Loading />;
-  if (error) return <div>Failed to load</div>;
+  if (error) return <ErrorComponent />;
   if (!data) return notFound();
 
   let itemName = tableName.charAt(0).toUpperCase() + tableName.slice(1);
