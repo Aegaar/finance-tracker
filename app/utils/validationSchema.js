@@ -23,7 +23,8 @@ export const createItemSchema = object({
     .lte(999999999.99, { message: "Amount must be max 9 digits long" })
     .refine(
       (n) => {
-        return n.toString().split(".")[1].length <= 2;
+        const decimalPart = n.toString().split(".")[1];
+        return decimalPart ? decimalPart.length <= 2 : true;
       },
       { message: "Max precision is 2 decimal places" }
     ),
