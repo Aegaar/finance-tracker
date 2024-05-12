@@ -2,9 +2,10 @@
 <br />
 <div align="center">
   <h1 align="center">Finance tracker</h1>
+  <img src="https://github.com/Aegaar/finance-tracker/assets/117531984/ca5c8927-1720-41ea-a90c-2486888d9882"/>
     <p align="center">
     <br />
-    <a href="https://finance-tracker-bay.vercel.app/">View Demo</a>
+  <a href="https://finance-tracker-bay.vercel.app">View Demo</a>
      <br />
   </p>
 </div>
@@ -12,14 +13,15 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-The "Finance tracking" app allows users to manage their finances with ease. It allows users to add, delete and track their income and expense. In addition, users can use the chart generation function to visualise their income and expense for specific income sources.
+The 'Finance tracking' app allows users to manage their finances with ease. It allows users to add, delete, and track their income and expenses. In addition, users can use the chart generation function to visualize their income and expenses for specific income sources.
 
 Features:
 * Adding and deleting income and expenses assigned to a user account
-* Displays charts that show an analysis of the user's income and expense for a given source. 
+* Displays charts that show an analysis of the user's income and expenses for a given source.
 * Displays lists of recently added expenses and income
 * Easy login via Google or Github account
-* Responsive deisgn
+* Displays total expenses and incomes
+* Responsive design
 
 ### Built With:
 
@@ -27,7 +29,7 @@ Features:
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=nextjs,prisma,postgres,tailwind" />
   </a>
-  <p  align="center">| NEXTJS | PRISMA | POSTGRES | TAILWIND |</p>
+  <p  align="center">| NEXTJS | PRISMA | POSTGRES | TAILWIND | NEXTAUTH |</p>
 </p>
 
 ### Deployed on: 
@@ -36,8 +38,8 @@ Features:
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=supabase,vercel" />
   </a>
-  <p  align="center">| SUPABASE | VERCEL |</p>
-
+  <p  align="center">| SUPABASE | VERCEL | </p>
+  <p align="center"> <a href="https://finance-tracker-bay.vercel.app">View Demo</a></p>
 </p>
 
 <!-- GETTING STARTED -->
@@ -46,11 +48,14 @@ Features:
 
 ### Prerequisites
 
- <a href="https://skillicons.dev">
+ <p align="center">
+   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=nodejs" />
-</a>
-  
+  </a>
+  </p>
+  <p align="center">
   <a href="https://nodejs.org/en/download">Node download</a>
+  </p>
 
 ### Installation
 
@@ -62,7 +67,7 @@ Features:
 3. Install NPM packages
    
    ```sh
-   npm install
+   npm ci
    ```
 4. Navigate to the project directory
  
@@ -86,7 +91,12 @@ Features:
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+  <img src="https://github.com/Aegaar/finance-tracker/assets/117531984/b2c48798-2c2d-427e-950f-432ae1c0ac7f" />
+  <img src="https://github.com/Aegaar/finance-tracker/assets/117531984/ca5c8927-1720-41ea-a90c-2486888d9882"/>
+  <img src="https://github.com/Aegaar/finance-tracker/assets/117531984/3c935ef9-7fca-41e4-9248-72bce8e0dcc5" width="500px" />
+  <img src="https://github.com/Aegaar/finance-tracker/assets/117531984/8e3a12bb-9a70-42e6-b026-581fd7af4fe8" width="500px"/>
+
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `LICENSE` for more information.
