@@ -28,11 +28,11 @@ function FinancialChart({ items, title, text }) {
   useEffect(() => {
     const itemsBySource = {};
 
-    items.forEach((item) => {
+    items.map((item) => {
       if (!itemsBySource[item.source]) {
-        itemsBySource[item.source] = item.amount;
+        itemsBySource[item.source] = Number(item.amount);
       } else {
-        itemsBySource[item.source] += item.amount;
+        itemsBySource[item.source] += Number(item.amount);
       }
     });
     const chartDataArray = Object.entries(itemsBySource).map(

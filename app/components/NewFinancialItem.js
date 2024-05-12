@@ -103,6 +103,7 @@ function NewFinancialItem({ tableName, link, sources }) {
                 </label>
 
                 <input
+                  step="0.01"
                   type="number"
                   id="amount"
                   name="amount"

@@ -20,7 +20,13 @@ export const createItemSchema = object({
     .positive({
       errorMap: () => ({ message: "Amount must be a positive number" }),
     })
-    .lte(999999999, { message: "Amount must be max 10 digits long" }),
+    .lte(999999999.99, { message: "Amount must be max 9 digits long" })
+    .refine(
+      (n) => {
+        return n.toString().split(".")[1].length <= 2;
+      },
+      { message: "Max precision is 2 decimal places" }
+    ),
   source: string({
     errorMap: () => ({ message: "Source must not be empty" }),
   })

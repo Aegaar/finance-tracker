@@ -9,7 +9,7 @@ function RecentFinancialItems({ lastAddedItems }) {
         <article className="rounded-xl text-black bg-white  mb-5">
           {lastAddedItems?.map((item) => (
             <div
-              key={item.id}
+              key={item.slug}
               className={`p-2 sm:p-3 lg:p-5 flex justify-between gap-2 sm:gap-4 border-2 rounded-xl mb-3 border-black ${
                 item.type === "income" ? "border-green-700" : "border-red-500"
               }`}

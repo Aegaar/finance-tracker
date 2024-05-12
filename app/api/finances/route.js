@@ -4,6 +4,7 @@ import { getAuthSession } from "../../utils/auth";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../utils/auth";
 import { createItemSchema } from "../../utils/validationSchema";
+import Decimal from "decimal.js";
 
 const uniqueSlug = require("unique-slug");
 
@@ -45,7 +46,7 @@ export async function POST(NextRequest) {
       data: {
         title: body.title,
         description: body.description,
-        amount: body.amount,
+        amount: new Decimal(body.amount),
         userEmail: session.user.email,
         slug: slugBase + "-" + incomeSlug,
         source: body.source,

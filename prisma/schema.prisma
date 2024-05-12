@@ -10,7 +10,7 @@ datasource db {
 model Income {
   id          Int          @id @default(autoincrement())
   title       String       @db.VarChar(255)
-  amount      Int
+  amount      Decimal      @db.Decimal(11, 2)
   slug        String       @unique
   description String       @db.Text
   source      IncomeSource @default(SALARY)
@@ -24,7 +24,7 @@ model Expense {
   id          Int           @id @default(autoincrement())
   title       String        @db.VarChar(255)
   slug        String        @unique
-  amount      Int
+  amount      Decimal       @db.Decimal(11, 2)
   description String        @db.Text
   source      ExpenseSource @default(GROCERIES)
   createdAt   DateTime      @default(now())

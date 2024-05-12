@@ -30,7 +30,7 @@ function DashboardPage() {
 
   if (isLoading) return <Loading />;
   if (error) return <Error />;
-  if (!data)
+  if (!data || data === undefined)
     return (
       <div className="flex items-center justify-center mt-10">No data</div>
     );
@@ -40,12 +40,13 @@ function DashboardPage() {
       <div className=" lg:w-4/6 lg:mr-10 flex flex-col ">
         {data.incomes.length > 0 ? (
           <FinancialChart
+            key={data.incomes.map((income) => income.slug).join("_")}
             items={data.incomes}
             title="incomes"
             text="Total income from a given source"
           />
         ) : (
-          <div className=" mt-10 mb-10">
+          <div className="mt-10 mb-10">
             <div className="flex align-center justify-center">
               <BarChart3 size={30} />
               <p className="text-center font-bold text-blue-500 pl-4 text-xl">
@@ -64,12 +65,13 @@ function DashboardPage() {
         )}
         {data.expenses.length > 0 ? (
           <FinancialChart
+            key={data.expenses.map((expense) => expense.slug).join("_")}
             items={data.expenses}
             title="expenses"
             text="Total expense from a given source"
           />
         ) : (
-          <div className=" mt-10 mb-10">
+          <div className="mt-10 mb-10">
             <div className="flex align-center justify-center">
               <BarChart3 size={30} />
               <p className="text-center font-bold text-blue-500 pl-4 text-xl">
