@@ -13,7 +13,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-The 'Finance tracking' app allows users to manage their finances with ease. It allows users to add, delete, and track their income and expenses. In addition, users can use the chart generation function to visualize their income and expenses for specific income sources.
+The "Financial Tracker" application provides users with a convenient tool to control their finances. Thanks to it, you can easily add, remove and track both income and expenses. Additionally, users can generate charts depending on the source of expense or income. The application also displays summaries of user activities.
 
 Features:
 * Adding and deleting income and expenses assigned to a user account
